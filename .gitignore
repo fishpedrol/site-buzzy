@@ -1,0 +1,18 @@
+# Preserve apenas o README entre os arquivos Markdown.
+*.md
+!/README.md
+
+# Dependências e saídas de build.
+node_modules/
+dist/
+.vite/
+.cache/
+coverage/
+
+# Arquivos locais, temporários e do sistema.
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
+*.swp
