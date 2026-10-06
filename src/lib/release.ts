@@ -5,7 +5,7 @@ import { release } from "../config/release";
 export const aDefinir = "a definir na primeira versão";
 
 export interface Download {
-  /** Endereço direto do .exe validado. */
+  /** Endereço direto do .exe publicado. */
   url: string;
   nomeDoArquivo: string;
   versao: string;
@@ -67,12 +67,13 @@ function montarDownload(): Download | null {
   };
 }
 
-/** `null` enquanto não houver release validada: o botão fica desativado. */
+/** `null` enquanto não houver release publicada: o botão fica desativado. */
 export const download = montarDownload();
 
 /** Nome usado no comando de conferência do SHA-256. */
 export const nomeDoArquivo = download?.nomeDoArquivo ?? "Buzzy-<versão>-win-x64.exe";
 
 export const assinado = release.assinado;
+export const validacaoWindowsLimpoPendente = release.validacaoWindowsLimpoPendente;
 export const repositorio = release.urlDoCodigo;
 export const zipDoCodigo = release.urlDoZipDoCodigo;

@@ -4,11 +4,10 @@
  * Enquanto `urlDoDownload` for `null`, o botão "Baixar Buzzy para Windows" aparece desativado,
  * com o aviso "Ainda não há versão publicada", e a ficha mostra "a definir na primeira versão".
  *
- * Só preencha DEPOIS de validar o .exe no passo F9-P10 do projeto principal: portão aprovado,
- * execução em Windows x64 limpo (10 ou 11) sem .NET instalado, sem elevação, gravações só nas pastas
- * previstas e publicação autorizada pelo usuário. Nunca aponte para um .exe não validado.
+ * Preencha com uma release pública e informe separadamente se a execução em Windows limpo continua
+ * pendente. Publicar o arquivo não significa que essa validação foi concluída.
  *
- * Como preencher, quando houver a release validada:
+ * Como preencher, quando houver uma release:
  *   1. versao: a versão do .exe, sem "v" (ex.: "0.1.0").
  *   2. urlDoDownload: o endereço do asset na release do GitHub, que baixa o arquivo direto
  *      (ex.: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.0/Buzzy-0.1.0-win-x64.exe").
@@ -24,12 +23,13 @@
  * para o site nunca oferecer um download sem os dados de conferência.
  */
 export const release: Release = {
-  versao: null,
-  urlDoDownload: null,
-  tamanhoEmBytes: null,
-  sha256: null,
+  versao: "0.1.0",
+  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.0/Buzzy-0.1.0-win-x64.exe",
+  tamanhoEmBytes: 61971074,
+  sha256: "7E18227426FEF2CC788538312D80BD11C7D3A436007897CD1BD244A1373C8A17",
   assinado: false,
-  dataDaVersao: null,
+  dataDaVersao: "2026-10-06",
+  validacaoWindowsLimpoPendente: true,
 
   /**
    * Repositório do código-fonte (ação separada do download): o `origin` público do projeto principal.
@@ -48,6 +48,7 @@ export interface Release {
   sha256: string | null;
   assinado: boolean;
   dataDaVersao: string | null;
+  validacaoWindowsLimpoPendente: boolean;
   urlDoCodigo: string;
   urlDoZipDoCodigo: string;
 }

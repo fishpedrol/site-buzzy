@@ -2,7 +2,15 @@
 // Download (DEC-042): o .exe é a ação principal; o código no GitHub é uma ação separada.
 // Tudo o que muda por versão vem de src/config/release.ts, lido por src/lib/release.ts.
 import { rotulo, tituloDeSecao } from "../lib/estilos";
-import { aDefinir, assinado, download, nomeDoArquivo, repositorio, zipDoCodigo } from "../lib/release";
+import {
+  aDefinir,
+  assinado,
+  download,
+  nomeDoArquivo,
+  repositorio,
+  validacaoWindowsLimpoPendente,
+  zipDoCodigo,
+} from "../lib/release";
 
 const pastaDeDados = "%LOCALAPPDATA%\\Buzzy";
 // O runtime do .NET extrai numa pasta com o nome do arquivo .exe, sem a extensão (medido no F9-P10 do projeto principal).
@@ -107,13 +115,20 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
                   class={`${botao} border-ink text-cream bg-red shadow-[3px_3px_0_var(--color-ink)] transition-[translate,box-shadow,background] duration-150 ease-[ease] hover:translate-x-2 hover:translate-y-2 hover:bg-red-dark hover:shadow-[1px_1px_0_var(--color-ink)]`}
                   href={download.url}
                   download={download.nomeDoArquivo}
-                  aria-describedby="exe-arquivo"
+                  aria-describedby="exe-arquivo exe-validacao"
                 >
                   Baixar Buzzy para Windows <span class="text-[15px]" aria-hidden="true">↓</span>
                 </a>
                 <p class={`${notaDoBotao} font-mono break-all`} id="exe-arquivo">
                   {download.nomeDoArquivo} · {download.tamanho.split(" (")[0]}
                 </p>
+                {
+                  validacaoWindowsLimpoPendente && (
+                    <p class={notaDoBotao} id="exe-validacao">
+                      A verificação em Windows limpo, incluindo Windows 10, ainda está pendente.
+                    </p>
+                  )
+                }
               </>
             ) : (
               <>
