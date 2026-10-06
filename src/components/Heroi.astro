@@ -1,6 +1,7 @@
 ---
 import { caminho } from "../lib/caminho";
 import { rotulo } from "../lib/estilos";
+import Pixel from "./Pixel.astro";
 
 const fatos = [
   { cor: "bg-gold", texto: "Feito para Windows 10 e 11" },
@@ -14,7 +15,7 @@ const fatos = [
   aria-labelledby="hero-title"
 >
   <div class="celular:max-w-590">
-    <p class={`${rotulo} mb-19 text-red text-[10px]`}>
+    <p class={`${rotulo} mb-19 text-red text-[12px]`}>
       <span class="inline-block size-8 mr-8 bg-red shadow-[3px_3px_0_var(--color-gold)]" aria-hidden="true"></span> UM MASCOTE PARA WINDOWS
     </p>
     <h1
@@ -41,7 +42,7 @@ const fatos = [
       >
     </div>
     <ul
-      class="flex flex-wrap gap-x-23 gap-y-14 mt-40 text-meta font-mono text-[11px] leading-[1.5] tablet:gap-x-14 tablet:gap-y-11 estreito:mt-30 estreito:text-[10px]"
+      class="flex flex-wrap gap-x-23 gap-y-14 mt-40 text-meta font-mono text-[12px] leading-[1.5] tablet:gap-x-14 tablet:gap-y-11 estreito:mt-30 estreito:text-[11px]"
       aria-label="Sobre o Buzzy"
     >
       {
@@ -58,7 +59,7 @@ const fatos = [
     class="relative isolate grid min-h-460 place-items-center overflow-hidden border-2 border-ink bg-surface-neutral shadow-[9px_9px_0_var(--color-navy)] tablet:min-h-405 celular:w-[calc(100%-8px)] celular:min-h-[min(110vw,430px)] celular:justify-self-center"
   >
     <div
-      class="absolute z-2 inset-x-0 top-0 flex min-h-36 items-center justify-between px-14 text-cream bg-navy font-mono font-bold text-[9px] leading-none tracking-[0.1em] estreito:px-10 estreito:text-[8px]"
+      class="absolute z-2 inset-x-0 top-0 flex min-h-36 items-center justify-between px-14 text-cream bg-navy font-mono font-bold text-[10px] leading-none tracking-[0.08em] estreito:px-10 estreito:text-[9px]"
     >
       <span>UMA PRESENÇA LEVE NO SEU DESKTOP</span>
       <span class="text-gold-light" aria-hidden="true">01—01</span>
@@ -76,8 +77,8 @@ const fatos = [
       aria-hidden="true"
     >
     </div>
-    <div class="absolute z-2 top-117 left-51 text-red text-[22px]" aria-hidden="true">✳</div>
-    <div class="absolute z-2 top-208 right-57 text-green text-[17px]" aria-hidden="true">✳</div>
+    <Pixel nome="brilho" class="absolute z-2 top-119 left-53 size-17 text-red" />
+    <Pixel nome="brilho" class="absolute z-2 top-210 right-59 size-13 text-green" />
     <img
       class="relative z-1 w-[min(76%,356px)] mt-15 [filter:drop-shadow(8px_7px_0_rgba(18,24,48,0.1))] pixelated animate-buzzy-bob celular:w-[min(72%,315px)]"
       src={caminho("assets/parado-8x-recorte.png")}
@@ -93,13 +94,13 @@ const fatos = [
       <span></span>
     </div>
     <div
-      class="absolute z-2 bottom-52 left-15 flex items-center gap-8 text-brand font-mono font-bold text-[9px] leading-none tracking-[0.09em] estreito:left-10 estreito:text-[8px]"
+      class="absolute z-2 bottom-52 left-15 flex items-center gap-8 text-brand font-mono font-bold text-[10px] leading-none tracking-[0.06em] estreito:left-10 estreito:text-[9px]"
     >
       <span class="size-7 bg-red" aria-hidden="true"></span>
       SEU NOVO VIZINHO DE TELA
     </div>
     <span
-      class="absolute right-14 bottom-51 text-muted font-mono text-[10px] leading-[1.5] text-right estreito:right-10 estreito:text-[9px]"
+      class="absolute right-14 bottom-51 text-muted font-mono text-[11px] leading-[1.5] text-right estreito:right-10 estreito:text-[10px]"
       >feito de<br />pixels&nbsp;<span aria-hidden="true">▧</span></span
     >
   </div>

@@ -2,7 +2,7 @@
 // Cada uso completa com margem, cor e tamanho, sem repetir propriedades daqui.
 
 /** Rótulo em fonte mono acima dos títulos ("01 / MOVIMENTO"). Falta: margem, cor e tamanho. */
-export const rotulo = "font-mono font-bold leading-[1.4] tracking-[0.13em]";
+export const rotulo = "font-mono font-bold leading-[1.4] tracking-[0.08em]";
 
 /** Título de seção (h2). Falta: margem inferior e tamanho. */
 export const tituloDeSecao = "font-bold leading-[1.04] tracking-[-0.055em] text-balance";

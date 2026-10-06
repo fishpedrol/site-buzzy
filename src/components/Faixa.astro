@@ -1,17 +1,19 @@
 ---
+import Pixel from "./Pixel.astro";
+
 // Faixa vermelha entre a abertura e a seção de movimento. No celular, só o primeiro item aparece.
 const itens = ["DESKTOP, COM MAIS VIDA", "PIXEL ART DE 64 × 64", "UMA COMPANHIA NO SEU RITMO"];
 ---
 
 <div class="overflow-hidden border-y-2 border-ink text-cream bg-red">
   <div
-    class="section-wrap flex min-h-47 items-center justify-between gap-22 font-mono font-bold text-[10px] leading-[1.3] tracking-[0.1em] celular:justify-start celular:min-h-43 celular:overflow-hidden celular:whitespace-nowrap"
+    class="section-wrap flex min-h-47 items-center justify-between gap-22 font-mono font-bold text-[12px] leading-[1.3] tracking-[0.08em] celular:justify-start celular:min-h-43 celular:overflow-hidden celular:whitespace-nowrap"
   >
     {
       itens.map((texto, indice) => (
         <>
           <span class:list={[indice > 0 && "celular:hidden"]}>{texto}</span>
-          <span class:list={["text-gold-light text-[16px] font-bold", indice > 0 && "celular:hidden"]} aria-hidden="true">✳</span>
+          <Pixel nome="brilho" class={`size-12 flex-none text-gold-light ${indice > 0 ? "celular:hidden" : ""}`} />
         </>
       ))
     }

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Site de apresentação do Buzzy, mascote de desktop para Windows 11.",
+  "description": "Site de apresentação do Buzzy, mascote de desktop para Windows 10 e 11.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

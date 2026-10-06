@@ -15,7 +15,7 @@ const ajustes = [
   aria-labelledby="settings-title"
 >
   <div class="grid grid-cols-3 items-end gap-24 mb-39 celular:grid-cols-1 celular:gap-13 celular:mb-27">
-    <p class={`${rotulo} col-span-full -mb-7 text-red text-[10px] celular:col-auto celular:mb-0`}>04 / DO SEU JEITO</p>
+    <p class={`${rotulo} col-span-full -mb-7 text-red text-[12px] celular:col-auto celular:mb-0`}>04 / DO SEU JEITO</p>
     <h2 class={`${tituloDeSecao} text-[clamp(38px,4.6vw,54px)]`} id="settings-title">
       Você escolhe<br /><span class="text-red">o ritmo.</span>
     </h2>
@@ -29,7 +29,7 @@ const ajustes = [
       class="relative z-1 w-[min(100%,245px)] justify-self-center m-0 -rotate-2 border-2 border-ink bg-cream shadow-[5px_5px_0_var(--color-navy)] celular:w-[min(100%,180px)] estreito:w-[min(100%,229px)]"
     >
       <figcaption
-        class="flex min-h-28 items-center justify-between px-8 border-b-2 border-ink text-cream bg-navy font-mono font-bold text-[9px] leading-none tracking-[0.06em]"
+        class="flex min-h-28 items-center justify-between px-8 border-b-2 border-ink text-cream bg-navy font-mono font-bold text-[10px] leading-none tracking-[0.05em]"
       >
         <span>ENERGIA</span><span class="text-gold text-[7px] tracking-[0.14em]" aria-hidden="true">● ● ●</span>
       </figcaption>
@@ -42,16 +42,16 @@ const ajustes = [
         loading="lazy"
       />
     </figure>
-    <div class="grid col-2 gap-12 px-6 celular:grid-cols-1 celular:py-8 celular:px-3 estreito:col-auto">
+    <div class="grid gap-14 px-6 celular:py-8 celular:px-3">
       {
         ajustes.map((ajuste) => (
           <div class="flex items-center gap-11">
-            <span class="grid size-28 flex-none place-items-center border border-ink text-navy bg-gold-light font-mono font-bold text-[10px] leading-none">
+            <span class="grid size-30 flex-none place-items-center border border-ink text-navy bg-gold-light font-mono font-bold text-[12px] leading-none">
               {ajuste.marca}
             </span>
             <span>
-              <b class="block mb-3 text-[13px]">{ajuste.titulo}</b>
-              <small class="block text-meta text-[11px] leading-[1.4]">{ajuste.texto}</small>
+              <b class="block mb-3 text-[15px]">{ajuste.titulo}</b>
+              <small class="block text-meta text-[13px] leading-[1.45]">{ajuste.texto}</small>
             </span>
           </div>
         ))

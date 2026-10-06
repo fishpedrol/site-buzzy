@@ -1,0 +1,185 @@
+---
+// Ícones em pixel art, desenhados aqui em grade (# é um pixel aceso), no mesmo mundo do Buzzy.
+// Substituem caracteres Unicode, que mudam de desenho conforme a fonte do sistema.
+// Cada linha vira retângulos horizontais; a cor vem de currentColor e o tamanho, da classe.
+
+const desenhos = {
+  // Anda e escala: seta para cima e para a direita.
+  escalar: [
+    "....######",
+    ".......###",
+    "......####",
+    ".....###.#",
+    "....###..#",
+    "...###....",
+    "..###.....",
+    ".###......",
+    "###.......",
+    "##........",
+  ],
+  // Pula por aí: uma seta para cima saindo do chão.
+  pular: [
+    "....##....",
+    "...####...",
+    "..######..",
+    ".##.##.##.",
+    "....##....",
+    "....##....",
+    "..........",
+    "..######..",
+    "..........",
+    "##########",
+  ],
+  // Reage a você: o cursor do mouse.
+  cursor: [
+    "#.........",
+    "##........",
+    "###.......",
+    "####......",
+    "#####.....",
+    "######....",
+    "###.......",
+    "#.##......",
+    "...##.....",
+    "...##.....",
+  ],
+  // Tem seu ritmo: barras de energia crescentes.
+  ritmo: [
+    "..........",
+    ".......##.",
+    ".......##.",
+    "....##.##.",
+    "....##.##.",
+    ".##.##.##.",
+    ".##.##.##.",
+    ".##.##.##.",
+    ".##.##.##.",
+    "..........",
+  ],
+  // Fica no seu computador: uma casinha.
+  casa: [
+    "....##....",
+    "...####...",
+    "..######..",
+    ".########.",
+    "##########",
+    ".##....##.",
+    ".##.##.##.",
+    ".##.##.##.",
+    ".##.##.##.",
+    ".########.",
+  ],
+  // Não captura a tela: um monitor riscado.
+  semTela: [
+    "##########",
+    "#.......##",
+    "#......#.#",
+    "#.....#..#",
+    "#....#...#",
+    "#...#....#",
+    "#..#.....#",
+    "##########",
+    "....##....",
+    "..######..",
+  ],
+  // Você decide o espaço: setas para os quatro lados (arrastar).
+  mover: [
+    "....##....",
+    "...####...",
+    "....##....",
+    ".#..##..#.",
+    "##########",
+    "##########",
+    ".#..##..#.",
+    "....##....",
+    "...####...",
+    "....##....",
+  ],
+  // Download.
+  baixar: [
+    "...####...",
+    "...####...",
+    "...####...",
+    "...####...",
+    "##########",
+    ".########.",
+    "..######..",
+    "...####...",
+    "....##....",
+    "..........",
+  ],
+  // Código-fonte: os sinais de menor e maior.
+  codigo: [
+    "............",
+    "............",
+    "...##..##...",
+    "..##....##..",
+    ".##......##.",
+    "##........##",
+    ".##......##.",
+    "..##....##..",
+    "...##..##...",
+    "............",
+  ],
+  // Brilho decorativo de quatro pontas.
+  brilho: [
+    "...#...",
+    "...#...",
+    "..###..",
+    "#######",
+    "..###..",
+    "...#...",
+    "...#...",
+  ],
+  // Selo de "local": um alvo.
+  alvo: [
+    "..######..",
+    ".#......#.",
+    "#..####..#",
+    "#.#....#.#",
+    "#.#.##.#.#",
+    "#.#.##.#.#",
+    "#.#....#.#",
+    "#..####..#",
+    ".#......#.",
+    "..######..",
+  ],
+} as const;
+
+export type NomeDoPixel = keyof typeof desenhos;
+
+interface Props {
+  nome: NomeDoPixel;
+  class?: string;
+}
+
+const { nome, class: classe } = Astro.props;
+const grade = desenhos[nome];
+const largura = grade[0].length;
+const altura = grade.length;
+
+// Junta os pixels acesos de cada linha em retângulos contínuos.
+const retangulos: { x: number; y: number; w: number }[] = [];
+grade.forEach((linha, y) => {
+  let inicio = -1;
+  for (let x = 0; x <= linha.length; x++) {
+    const aceso = linha[x] === "#";
+    if (aceso && inicio < 0) inicio = x;
+    if (!aceso && inicio >= 0) {
+      retangulos.push({ x: inicio, y, w: x - inicio });
+      inicio = -1;
+    }
+  }
+});
+---
+
+<svg
+  class={classe}
+  viewBox={`0 0 ${largura} ${altura}`}
+  fill="currentColor"
+  shape-rendering="crispEdges"
+  aria-hidden="true"
+  focusable="false"
+>
+  {retangulos.map((r) => <rect x={r.x} y={r.y} width={r.w} height="1" />)}
+</svg>

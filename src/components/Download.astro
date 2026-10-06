@@ -2,6 +2,7 @@
 // Download (DEC-042): o .exe é a ação principal; o código no GitHub é uma ação separada.
 // Tudo o que muda por versão vem de src/config/release.ts, lido por src/lib/release.ts.
 import { rotulo, tituloDeSecao } from "../lib/estilos";
+import Pixel from "./Pixel.astro";
 import {
   aDefinir,
   assinado,
@@ -66,13 +67,13 @@ const cartao =
 const topoDoCartao = "flex min-h-31 items-center justify-between gap-9 mb-14";
 const icone =
   "grid size-34 place-items-center border border-ink text-cream font-mono font-bold leading-none";
-const situacao = "py-6 px-7 font-mono font-bold text-[9px] leading-none tracking-[0.05em]";
+const situacao = "py-6 px-7 font-mono font-bold text-[10px] leading-none tracking-[0.04em]";
 const tituloDoCartao = "mb-8 text-[19px] font-bold tracking-[-0.03em] text-balance celular:text-[17px]";
-const textoDoCartao = "mb-16 text-muted text-[12px] leading-[1.55]";
+const textoDoCartao = "mb-16 text-muted text-[14px] leading-[1.55]";
 const botao =
-  "inline-flex min-h-42 w-full items-center justify-center gap-10 px-12 border-2 text-[12px] font-bold text-center";
-const notaDoBotao = "mt-8 mb-0 text-status text-[11px] leading-[1.45]";
-const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
+  "inline-flex min-h-44 w-full items-center justify-center gap-10 px-12 border-2 text-[14px] font-bold text-center";
+const notaDoBotao = "mt-8 mb-0 text-status text-[12px] leading-[1.45]";
+const tituloDoQuadro = `${rotulo} mb-9 text-red text-[11px] uppercase`;
 ---
 
 <section class="border-y-2 border-ink text-cream bg-navy" id="download" aria-labelledby="download-title" data-fundo="escuro">
@@ -80,11 +81,11 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
     class="section-wrap grid grid-cols-[0.78fr_1.22fr] gap-x-[clamp(35px,7vw,93px)] gap-y-34 pt-83 pb-85 tablet:grid-cols-[0.65fr_1.35fr] tablet:gap-x-25 celular:grid-cols-1 celular:gap-26 celular:py-62"
   >
     <div>
-      <p class={`${rotulo} mb-19 text-gold-light text-[10px]`}>05 / LEVE O BUZZY COM VOCÊ</p>
+      <p class={`${rotulo} mb-19 text-gold-light text-[12px]`}>05 / LEVE O BUZZY COM VOCÊ</p>
       <h2 class={`${tituloDeSecao} mb-18 text-[clamp(41px,4.7vw,57px)]`} id="download-title">
         Um cantinho<br />mais <span class="text-gold-light">animado.</span>
       </h2>
-      <p class="max-w-340 mb-0 text-on-navy text-[13px] leading-[1.65] celular:max-w-480">
+      <p class="max-w-380 mb-0 text-on-navy text-[15px] leading-[1.65] celular:max-w-480">
         {
           download
             ? "Um único arquivo .exe para Windows 10 ou 11 (64 bits), com tudo dentro: não precisa baixar nem instalar mais nada. Baixe, abra, e o Buzzy aparece no seu desktop."
@@ -96,7 +97,7 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
     <div class="grid grid-cols-2 gap-14 celular:gap-10 estreito:grid-cols-1">
       <article class:list={[cartao, download ? "bg-cream" : "bg-download-pending"]} aria-labelledby="exe-title" data-fundo="claro">
         <div class={topoDoCartao}>
-          <span class={`${icone} bg-red text-[18px]`} aria-hidden="true">↓</span>
+          <span class={`${icone} bg-red`} aria-hidden="true"><Pixel nome="baixar" class="size-16" /></span>
           {
             download ? (
               <span class={`${situacao} text-green-dark bg-status-ready-bg`}>VERSÃO {download.versao}</span>
@@ -153,7 +154,7 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
 
       <article class={`${cartao} bg-cream`} aria-labelledby="codigo-title" data-fundo="claro">
         <div class={topoDoCartao}>
-          <span class={`${icone} bg-brand text-[10px]`} aria-hidden="true">&lt;/&gt;</span>
+          <span class={`${icone} bg-brand`} aria-hidden="true"><Pixel nome="codigo" class="w-20 h-17" /></span>
           <span class={`${situacao} text-green-dark bg-status-ready-bg`}>NO GITHUB</span>
         </div>
         <h3 class={tituloDoCartao} id="codigo-title">Código-fonte</h3>
@@ -180,7 +181,7 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
       data-fundo="claro"
     >
       <div
-        class="flex min-h-34 items-center justify-between gap-12 px-16 border-b-2 border-ink bg-gold font-mono font-bold text-[9px] leading-none tracking-[0.1em] celular:px-12"
+        class="flex min-h-34 items-center justify-between gap-12 px-16 border-b-2 border-ink bg-gold font-mono font-bold text-[11px] leading-none tracking-[0.08em] celular:px-12"
       >
         <h3 class="m-0 text-[inherit] font-[inherit] uppercase" id="ficha-title">Ficha da versão</h3>
         <span class="text-brand">{download ? `v${download.versao}` : "PLANEJADA"}</span>
@@ -190,7 +191,7 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
         <div class="py-18 px-22 celular:py-14 celular:px-13">
           {
             !download && (
-              <p class="mb-12 text-body text-[12px] leading-[1.55]">
+              <p class="mb-12 text-body text-[13px] leading-[1.55]">
                 Assim será a primeira versão. Versão, tamanho e SHA-256 entram aqui quando ela for publicada.
               </p>
             )
@@ -198,15 +199,15 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
           <dl class="m-0 border-t border-line">
             {
               ficha.map((linha) => (
-                <div class="grid grid-cols-[118px_1fr] gap-14 py-9 border-b border-line celular:grid-cols-1 celular:gap-3">
-                  <dt class="font-mono font-bold text-brand text-[10px] leading-[1.6] tracking-[0.04em] uppercase">
+                <div class="grid grid-cols-[132px_1fr] gap-14 py-10 border-b border-line celular:grid-cols-1 celular:gap-3">
+                  <dt class="font-mono font-bold text-brand text-[11px] leading-[1.75] tracking-[0.03em] uppercase">
                     {linha.nome}
                   </dt>
                   <dd
                     class:list={[
-                      "m-0 text-[12px] leading-[1.55] [overflow-wrap:anywhere]",
+                      "m-0 text-[14px] leading-[1.55] [overflow-wrap:anywhere]",
                       linha.pendente ? "text-status italic" : "text-ink",
-                      linha.dado && "font-mono text-[11px] break-all",
+                      linha.dado && "font-mono text-[13px] break-all",
                     ]}
                   >
                     {linha.valor}
@@ -222,12 +223,12 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
         >
           <div>
             <h4 class={tituloDoQuadro}>Confira o arquivo</h4>
-            <p class="mb-9 text-body text-[11px] leading-[1.55]">
+            <p class="mb-9 text-body text-[13px] leading-[1.55]">
               Antes de abrir, compare o SHA-256 no PowerShell, na pasta do download. O resultado tem de ser igual ao da
               ficha.
             </p>
             <code
-              class="block py-10 px-11 border border-ink text-cream bg-ink font-mono text-[11px] leading-[1.5]"
+              class="block py-10 px-11 border border-ink text-cream bg-ink font-mono text-[12px] leading-[1.5]"
               ><span>Get-FileHash </span><span class="break-all">{arquivoNoComando}</span>{" "}<span
                 class="whitespace-nowrap">-Algorithm SHA256</span
               ></code
@@ -238,12 +239,12 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
             !assinado && (
               <div>
                 <h4 class={tituloDoQuadro}>Se o Windows avisar</h4>
-                <p class="mb-8 text-body text-[11px] leading-[1.55]">
+                <p class="mb-8 text-body text-[13px] leading-[1.55]">
                   Sem assinatura, o SmartScreen pode mostrar "O Windows protegeu o computador". Com o SHA-256 conferido:
                 </p>
-                <ol class="grid gap-6 m-0 p-0 list-none text-ink text-[11px] leading-[1.45]">
+                <ol class="grid gap-8 m-0 p-0 list-none text-ink text-[13px] leading-[1.45]">
                   <li class="flex gap-8">
-                    <span class="grid size-18 flex-none place-items-center bg-navy text-gold-light font-mono font-bold text-[9px]">
+                    <span class="grid size-20 flex-none place-items-center bg-navy text-gold-light font-mono font-bold text-[11px]">
                       1
                     </span>
                     <span>
@@ -251,7 +252,7 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
                     </span>
                   </li>
                   <li class="flex gap-8">
-                    <span class="grid size-18 flex-none place-items-center bg-navy text-gold-light font-mono font-bold text-[9px]">
+                    <span class="grid size-20 flex-none place-items-center bg-navy text-gold-light font-mono font-bold text-[11px]">
                       2
                     </span>
                     <span>
@@ -259,7 +260,7 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
                     </span>
                   </li>
                 </ol>
-                <p class="mt-10 mb-0 text-meta text-[11px] leading-[1.5]">
+                <p class="mt-10 mb-0 text-meta text-[13px] leading-[1.5]">
                   Se o Controle Inteligente de Aplicativos (Smart App Control) estiver ligado, o Windows pode bloquear o
                   arquivo sem oferecer essa opção.
                 </p>

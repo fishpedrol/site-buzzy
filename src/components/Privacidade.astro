@@ -1,12 +1,13 @@
 ---
 import { caminho } from "../lib/caminho";
 import { rotulo, tituloDeSecao } from "../lib/estilos";
+import Pixel from "./Pixel.astro";
 
 const pontos = [
-  { icone: "⌂", titulo: "Fica no seu computador", texto: "Sem conta e sem enviar seus dados para serviços." },
-  { icone: "□", titulo: "Não captura a tela", texto: "Não lê o conteúdo de outros programas." },
-  { icone: "↙", titulo: "Você decide o espaço", texto: "Arraste ou esconda Buzzy quando quiser." },
-];
+  { icone: "casa", titulo: "Fica no seu computador", texto: "Sem conta e sem enviar seus dados para serviços." },
+  { icone: "semTela", titulo: "Não captura a tela", texto: "Não lê o conteúdo de outros programas." },
+  { icone: "mover", titulo: "Você decide o espaço", texto: "Arraste ou esconda Buzzy quando quiser." },
+] as const;
 
 const cartao = "absolute h-215 border-2 border-ink";
 const linhasDaJanela = ["w-[62%]", "w-[82%]", "w-[48%]"];
@@ -18,21 +19,21 @@ const linhasDaJanela = ["w-[62%]", "w-[82%]", "w-[48%]"];
   aria-labelledby="privacy-title"
 >
   <div
-    class="flex size-96 flex-col items-center justify-center gap-5 -rotate-8 border-2 border-green rounded-full text-green font-mono font-bold text-[8px] leading-none tracking-[0.07em] tablet:size-76 celular:size-67 celular:justify-self-end celular:-mb-87 estreito:size-58 estreito:-mb-77 estreito:text-[7px]"
+    class="flex size-96 flex-col items-center justify-center gap-5 -rotate-8 border-2 border-green rounded-full text-green font-mono font-bold text-[9px] leading-none tracking-[0.05em] tablet:size-76 celular:size-67 celular:justify-self-end celular:-mb-87 estreito:size-58 estreito:-mb-77 estreito:text-[8px]"
     aria-hidden="true"
   >
-    <span>LOCAL</span><b class="text-[29px] leading-[0.9] estreito:text-[23px]">◎</b><span>NO SEU PC</span>
+    <span>LOCAL</span><Pixel nome="alvo" class="size-24 estreito:size-18" /><span>NO SEU PC</span>
   </div>
 
   <div class="celular:relative celular:z-1">
-    <p class={`${rotulo} mb-15 text-red text-[10px]`}>03 / CURIOSIDADE COM LIMITES</p>
+    <p class={`${rotulo} mb-15 text-red text-[12px]`}>03 / CURIOSIDADE COM LIMITES</p>
     <h2
       class={`${tituloDeSecao} mb-19 text-[clamp(38px,4.4vw,53px)] celular:text-[clamp(38px,10vw,51px)]`}
       id="privacy-title"
     >
       Curioso,<br /><span class="text-red">não bisbilhoteiro.</span>
     </h2>
-    <p class="max-w-510 mb-22 text-body text-[14px] leading-[1.7]">
+    <p class="max-w-540 mb-22 text-body text-[16px] leading-[1.65]">
       Buzzy pode se aproximar da janela que você está usando. Para isso, consulta apenas a posição e o monitor — não lê
       títulos, textos nem o conteúdo da tela.
     </p>
@@ -41,14 +42,14 @@ const linhasDaJanela = ["w-[62%]", "w-[82%]", "w-[48%]"];
         pontos.map((ponto) => (
           <div class="flex items-center gap-13 py-20 border-b border-line">
             <span
-              class="grid size-33 flex-none place-items-center border border-green text-green font-mono font-bold text-[16px] leading-none"
+              class="grid size-36 flex-none place-items-center border border-green text-green"
               aria-hidden="true"
             >
-              {ponto.icone}
+              <Pixel nome={ponto.icone} class="size-18" />
             </span>
             <p class="m-0">
-              <b class="block mb-3 text-[13px]">{ponto.titulo}</b>
-              <small class="block text-meta text-[11px] leading-[1.4]">{ponto.texto}</small>
+              <b class="block mb-3 text-[15px]">{ponto.titulo}</b>
+              <small class="block text-meta text-[13px] leading-[1.45]">{ponto.texto}</small>
             </p>
           </div>
         ))
@@ -64,7 +65,7 @@ const linhasDaJanela = ["w-[62%]", "w-[82%]", "w-[48%]"];
         class="relative top-26 inline-block size-7 ml-10 rounded-full bg-red"></i>
     </div>
     <div class={`${cartao} z-1 w-[min(100%,280px)] p-16 [transform:rotate(-4deg)] bg-window`}>
-      <span class="block mb-21 text-brand font-mono font-bold text-[9px] leading-none tracking-[0.08em]">SUA JANELA</span>
+      <span class="block mb-21 text-brand font-mono font-bold text-[10px] leading-none tracking-[0.06em]">SUA JANELA</span>
       {linhasDaJanela.map((largura) => <b class={`block ${largura} h-7 mb-11 bg-[rgba(40,58,95,0.16)]`} />)}
       <span class="absolute right-13 bottom-11 text-green font-mono font-bold text-[21px] leading-none">▣</span>
     </div>
@@ -78,8 +79,8 @@ const linhasDaJanela = ["w-[62%]", "w-[82%]", "w-[48%]"];
         loading="lazy"
       />
     </div>
-    <span class="absolute top-4 right-18 text-red text-[29px]">✳</span>
-    <span class="absolute bottom-0 left-3 text-green-dark font-mono font-bold text-[10px] leading-[1.5]"
+    <Pixel nome="brilho" class="absolute top-8 right-20 size-21 text-red" />
+    <span class="absolute bottom-0 left-3 text-green-dark font-mono font-bold text-[11px] leading-[1.5]"
       >só a posição.<br />nada do conteúdo.</span
     >
   </div>
