@@ -15,6 +15,8 @@ import {
 const pastaDeDados = "%LOCALAPPDATA%\\Buzzy";
 // O runtime do .NET extrai numa pasta com o nome do arquivo .exe, sem a extensão (medido no F9-P10 do projeto principal).
 const pastaDoRuntime = `%TEMP%\\.net\\${nomeDoArquivo.replace(/\.exe$/i, "")}`;
+// Cada versão extrai numa pasta própria; ao remover, as de versões anteriores também saem.
+const pastasDoRuntime = `%TEMP%\\.net\\Buzzy-*-win-x64`;
 const chaveDoInicio = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run";
 // O comando é partido em pedaços só para quebrar a linha nos espaços certos; o texto copiado é o mesmo.
 const arquivoNoComando = `.\\${nomeDoArquivo}`;
@@ -55,7 +57,7 @@ const ficha = [
   { nome: "Rede", valor: "Nenhuma. Sem conta, telemetria nem atualização automática." },
   {
     nome: "Para remover",
-    valor: `Desmarque "Iniciar com o Windows" nas Configurações, saia pelo menu e apague o .exe e as pastas ${pastaDeDados} e ${pastaDoRuntime}.`,
+    valor: `Desmarque "Iniciar com o Windows" nas Configurações, saia pelo menu e apague o .exe, a pasta ${pastaDeDados} e as pastas ${pastasDoRuntime} (uma por versão já aberta).`,
   },
 ];
 

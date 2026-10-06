@@ -23,10 +23,10 @@
  * para o site nunca oferecer um download sem os dados de conferência.
  */
 export const release: Release = {
-  versao: "0.1.0",
-  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.0/Buzzy-0.1.0-win-x64.exe",
-  tamanhoEmBytes: 61971074,
-  sha256: "7E18227426FEF2CC788538312D80BD11C7D3A436007897CD1BD244A1373C8A17",
+  versao: "0.1.1",
+  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.1/Buzzy-0.1.1-win-x64.exe",
+  tamanhoEmBytes: 61971132,
+  sha256: "600957A9981DDA2645C9DDF56417C4D34038A5D1FD11B6E010C79CF7D2308EC0",
   assinado: false,
   dataDaVersao: "2026-10-06",
   validacaoWindowsLimpoPendente: true,
