@@ -144,13 +144,13 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[11px] uppercase`;
                 <p class={`${notaDoBotao} font-mono break-all`} id="exe-arquivo">
                   {download.nomeDoArquivo} · {download.tamanho.split(" (")[0]}
                 </p>
-                {
-                  validacaoWindowsLimpoPendente && (
-                    <p class={notaDoBotao} id="exe-validacao">
-                      A verificação em Windows limpo, incluindo Windows 10, ainda está pendente.
-                    </p>
-                  )
-                }
+                <p class={notaDoBotao} id="exe-validacao">
+                  {
+                    validacaoWindowsLimpoPendente
+                      ? "A verificação em Windows limpo ainda está pendente."
+                      : "Testado em Windows 10 22H2 e Windows 11 sem o .NET instalado."
+                  }
+                </p>
               </>
             ) : (
               <>

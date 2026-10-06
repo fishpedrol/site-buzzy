@@ -42,7 +42,8 @@ export const release: Release = {
   sha256: "E981D00818EEB7EDEF50CA46AA29059CF23628C9B140C5375D16F0B866008CE8",
   assinado: false,
   dataDaVersao: "2026-10-06",
-  validacaoWindowsLimpoPendente: true,
+  // Falso desde 2026-10-07: testado pelo usuário em Windows 10 22H2 e Windows 11 sem o .NET instalado.
+  validacaoWindowsLimpoPendente: false,
 
   /**
    * Repositório do código-fonte (ação separada do download): o `origin` público do projeto principal.
