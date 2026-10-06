@@ -1,0 +1,59 @@
+---
+// Página 404 própria. O Astro gera dist/404.html e o GitHub Pages a usa sozinho
+// para qualquer endereço inexistente dentro de /site-buzzy/.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { caminho } from "../lib/caminho";
+import { rotulo, tituloDeSecao } from "../lib/estilos";
+
+const inicio = caminho("");
+---
+
+<BaseLayout
+  title="Página não encontrada — Buzzy"
+  description="Este endereço não existe no site do Buzzy. Volte ao início para conhecer o mascote."
+>
+  <header class="text-cream bg-navy" data-fundo="escuro">
+    <div class="section-wrap flex min-h-78 items-center celular:min-h-70">
+      <a
+        class="inline-flex flex-none items-center gap-10 font-mono font-bold text-[18px] leading-none tracking-[0.11em] celular:text-[16px]"
+        href={inicio}
+        aria-label="Buzzy, voltar ao início"
+      >
+        <img class="size-32 object-contain pixelated celular:size-29" src={caminho("assets/icone-16x.png")} alt="" width="32" height="32" />
+        <span>BUZZY<span class="text-gold">.</span></span>
+      </a>
+    </div>
+    <div class="h-8 border-b-3 border-red bg-gold" aria-hidden="true"><span></span></div>
+  </header>
+
+  <main
+    class="section-wrap grid min-h-[calc(100vh-86px)] grid-cols-[1fr_auto] items-center gap-[clamp(36px,7vw,92px)] py-72 celular:grid-cols-1 celular:gap-40 celular:py-56"
+    id="conteudo"
+    aria-labelledby="titulo-404"
+  >
+    <div class="max-w-560">
+      <p class={`${rotulo} mb-19 text-red text-[10px]`}>
+        <span class="inline-block size-8 mr-8 bg-red shadow-[3px_3px_0_var(--color-gold)]" aria-hidden="true"></span> ERRO 404
+      </p>
+      <h1 class={`${tituloDeSecao} mb-20 text-[clamp(39px,5vw,60px)]`} id="titulo-404">
+        O Buzzy procurou, mas esta página <span class="text-red">não existe.</span>
+      </h1>
+      <p class="max-w-510 mb-32 text-intro text-[17px] leading-[1.7] celular:text-[16px]">
+        O endereço pode ter sido digitado errado ou a página saiu do ar. O site inteiro cabe numa página só, então
+        o início é sempre o melhor caminho.
+      </p>
+      <a
+        class="inline-flex min-h-50 items-center justify-center gap-16 px-17 border-2 border-ink text-cream bg-red text-[13px] font-bold shadow-[4px_4px_0_var(--color-ink)] transition-[translate,box-shadow,background] duration-150 ease-[ease] hover:translate-x-3 hover:translate-y-3 hover:bg-red-dark hover:shadow-[1px_1px_0_var(--color-ink)]"
+        href={inicio}
+        >Voltar ao início <span class="text-[17px]" aria-hidden="true">←</span></a
+      >
+    </div>
+
+    <div
+      class="grid size-240 place-items-center border-2 border-ink bg-surface-neutral shadow-[9px_9px_0_var(--color-navy)] celular:size-200 celular:justify-self-start"
+      aria-hidden="true"
+    >
+      <img class="w-152 pixelated motion-safe:animate-buzzy-bob celular:w-128" src={caminho("assets/parado-8x.png")} alt="" width="152" height="152" />
+    </div>
+  </main>
+</BaseLayout>

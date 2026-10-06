@@ -45,7 +45,7 @@ Versão, tamanho, SHA-256, assinatura e endereço do `.exe` ficam num só arquiv
 
 ## Publicação
 
-O destino é o GitHub Pages de projeto em `https://fishpedrol.github.io/site-buzzy/`, publicado pelo workflow `.github/workflows/deploy.yml` (GitHub Actions) a cada push na `main`. O `astro.config.mjs` define `site` e `base` (`/site-buzzy/`), e todos os caminhos de imagens e estilos respeitam essa base. O passo a passo, incluindo como ativar o download, está em [GUIA_GITHUB_PAGES.md](GUIA_GITHUB_PAGES.md). O site ainda não foi publicado.
+O site está publicado como GitHub Pages de projeto em **[fishpedrol.github.io/site-buzzy](https://fishpedrol.github.io/site-buzzy/)**, pelo workflow `.github/workflows/deploy.yml` (GitHub Actions) a cada push na `main`. A fonte do Pages é "GitHub Actions" (não "Deploy from a branch"). O `astro.config.mjs` define `site` e `base` (`/site-buzzy/`), e todos os caminhos de imagens e estilos respeitam essa base. O passo a passo da configuração do repositório, da publicação, da validação e da ativação do download está em [GUIA_GITHUB_PAGES.md](GUIA_GITHUB_PAGES.md).
 
 ## Estrutura
 
@@ -55,7 +55,7 @@ site/
 ├── public/assets/      Pixel art e imagens usadas pela página
 ├── src/
 │   ├── config/         release.ts: o único arquivo da release (versão, URL, tamanho, SHA-256)
-│   ├── pages/          index.astro: monta a página com as seções
+│   ├── pages/          index.astro (a página) e 404.astro (página "não encontrada")
 │   ├── layouts/        Documento HTML base (cabeçalho do documento, estilos)
 │   ├── components/     Uma seção por arquivo: cabeçalho, herói, faixa, movimento,
 │   │                   personalidade, privacidade, ajustes, download e rodapé

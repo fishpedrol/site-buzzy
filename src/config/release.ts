@@ -24,12 +24,12 @@
  * para o site nunca oferecer um download sem os dados de conferência.
  */
 export const release: Release = {
-  versao: null,
-  urlDoDownload: null,
-  tamanhoEmBytes: null,
-  sha256: null,
+  versao: "0.1.0",
+  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.0/Buzzy-0.1.0-win-x64.exe",
+  tamanhoEmBytes: 61971074,
+  sha256: "7E18227426FEF2CC788538312D80BD11C7D3A436007897CD1BD244A1373C8A17",
   assinado: false,
-  dataDaVersao: null,
+  dataDaVersao: "2026-10-05",
 
   /**
    * Repositório do código-fonte (ação separada do download): o `origin` público do projeto principal.
