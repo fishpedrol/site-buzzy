@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/parado-8x.png" alt="Buzzy, o mascote em pixel art" width="152" />
+  <img src="public/assets/parado-8x.png" alt="Buzzy, o mascote em pixel art" width="152" />
 </p>
 
 <h1 align="center">Buzzy</h1>
 
 <p align="center">
   <strong>Um companheiro em pixels para o seu desktop.</strong><br />
-  Site de apresentação do mascote de desktop para Windows 11.
+  Site de apresentação do mascote de desktop para Windows 10 e 11.
 </p>
 
 <p align="center">
@@ -21,33 +21,51 @@
 
 Esta página apresenta o Buzzy e explica como ele se movimenta, reage e respeita o espaço de quem usa o computador. O site acompanha a identidade do aplicativo com pixel art original, paleta inspirada no chapéu de palha e uma interface leve, responsiva e acessível.
 
-O repositório contém somente o site. O código do aplicativo está no [repositório principal do Buzzy](https://github.com/fishpedrol/Claudio).
+O repositório contém somente o site. O código do aplicativo está no [repositório principal do Buzzy](https://github.com/fishpedrol/Buzzy).
 
 ## Prévia local
 
-Abra `index.html` em um navegador. O site é estático: não precisa instalar dependências nem executar um processo de build.
+O site é feito com [Astro](https://astro.build/) e [Tailwind CSS](https://tailwindcss.com/). Com Node.js 22.12 ou mais recente:
+
+```bash
+npm ci           # instala as dependências fixadas no package-lock.json
+npm run dev      # servidor de desenvolvimento em http://localhost:4321/site-buzzy/
+npm run build    # gera o site estático em dist/
+npm run preview  # serve o dist/ em http://localhost:4321/site-buzzy/
+```
 
 ## Downloads
 
 | Opção | Destino | Situação |
 |---|---|---|
-| Código-fonte | [Baixar ZIP do projeto](https://github.com/fishpedrol/Claudio/archive/refs/heads/main.zip) | Link direto para a branch `main` do repositório principal |
-| Aplicativo portátil | — | Ainda não há pacote publicado; o botão permanece desativado até existir uma release |
+| Buzzy para Windows | Um único `.exe` para Windows 10 ou 11 x64, sem instalador nem pacotes extras (o .NET vai dentro) | Ainda não há versão publicada: o botão fica desativado até `src/config/release.ts` receber a URL de uma release validada |
+| Código-fonte | [Repositório no GitHub](https://github.com/fishpedrol/Buzzy) ou [ZIP da branch `main`](https://github.com/fishpedrol/Buzzy/archive/refs/heads/main.zip) | Ação separada do download |
+
+Versão, tamanho, SHA-256, assinatura e endereço do `.exe` ficam num só arquivo, `src/config/release.ts`. Com a URL preenchida, o build falha se faltar algum dado de conferência.
 
 ## Publicação
 
-Os arquivos estão prontos para uma hospedagem estática: `index.html` fica na raiz, e as folhas de estilo, o JavaScript e as imagens usam caminhos relativos. O site ainda não foi publicado e não tem uma URL de produção.
+O destino é o GitHub Pages de projeto em `https://fishpedrol.github.io/site-buzzy/`, publicado pelo workflow `.github/workflows/deploy.yml` (GitHub Actions) a cada push na `main`. O `astro.config.mjs` define `site` e `base` (`/site-buzzy/`), e todos os caminhos de imagens e estilos respeitam essa base. O passo a passo, incluindo como ativar o download, está em [GUIA_GITHUB_PAGES.md](GUIA_GITHUB_PAGES.md). O site ainda não foi publicado.
 
 ## Estrutura
 
 ```text
 site/
-├── assets/       Pixel art e imagens usadas pela página
-├── index.html    Conteúdo e estrutura
-├── main.js       Navegação para telas pequenas
-├── styles.css    Identidade visual e layout responsivo
-├── .gitignore    Arquivos locais e gerados
-└── README.md     Este guia
+├── .github/workflows/  deploy.yml: build e publicação no GitHub Pages
+├── public/assets/      Pixel art e imagens usadas pela página
+├── src/
+│   ├── config/         release.ts: o único arquivo da release (versão, URL, tamanho, SHA-256)
+│   ├── pages/          index.astro: monta a página com as seções
+│   ├── layouts/        Documento HTML base (cabeçalho do documento, estilos)
+│   ├── components/     Uma seção por arquivo: cabeçalho, herói, faixa, movimento,
+│   │                   personalidade, privacidade, ajustes, download e rodapé
+│   ├── lib/            Caminhos com a base, leitura da release e classes compartilhadas
+│   └── styles/         global.css: Tailwind, paleta em @theme e as cenas em pixel art
+├── astro.config.mjs    Endereço, base e Tailwind
+├── package.json        Scripts e versões fixadas
+├── .gitignore          Arquivos locais e gerados
+├── GUIA_GITHUB_PAGES.md  Publicação, validação e ativação do download
+└── README.md           Este arquivo
 ```
 
 O repositório contém apenas os arquivos usados para apresentar e publicar o site.

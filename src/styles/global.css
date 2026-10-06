@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+/* As classes vêm só de src/; o README, o guia e o workflow não devem gerar utilitários. */
+@source not "../../README.md";
+@source not "../../GUIA_GITHUB_PAGES.md";
+@source not "../../.github";
+
+/*
+ * Breakpoints do site. O layout é desktop-first, com os mesmos limites inclusivos
+ * (max-width) do CSS original. A ordem de registro define a cascata: o mais estreito
+ * vem por último e vence.
+ */
+@custom-variant largo (@media (min-width: 1400px));
+@custom-variant tablet (@media (max-width: 980px));
+@custom-variant celular (@media (max-width: 720px));
+@custom-variant estreito (@media (max-width: 440px));
+
+@theme {
+  /* Espaçamento em pixels: p-22 = 22px, gap-13 = 13px. A pixel art pede medidas exatas. */
+  --spacing: 1px;
+
+  /* Só fontes do sistema; nada é baixado de terceiros. */
+  --font-*: initial;
+  --font-body: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Courier New", monospace;
+  --default-font-family: var(--font-body);
+  --default-mono-font-family: var(--font-mono);
+
+  /* Paleta "chapéu de palha". */
+  --color-*: initial;
+  --color-ink: #121830;
+  --color-navy: #1b2748;
+  --color-brand: #283a5f;
+  --color-blue: #3b5486;
+  --color-cream: #fff6e8;
+  --color-cream-deep: #ffe9cc;
+  --color-peach: #fdd5a6;
+  --color-gold: #efb262;
+  --color-gold-light: #fccb7e;
+  --color-red: #b83a37;
+  --color-red-dark: #a62f2d;
+  --color-green: #6b8a34;
+  --color-green-dark: #385225;
+
+  /* Textos sobre fundo claro. Todos passam de 4,5:1 no fundo mais escuro em que aparecem
+     (cartões coloridos, painel de ajustes, selo de situação). */
+  --color-muted: #626879;
+  --color-intro: #50576a;
+  --color-body: #555c6c;
+  --color-meta: #5e6472;
+  --color-count: #5e6472;
+  --color-legend: #676b77;
+  --color-status: #575d6c;
+  --color-disabled: #5e6472;
+
+  /* Textos sobre fundo azul-marinho. */
+  --color-nav: #d2d6df;
+  --color-on-navy: #c7cddd;
+  --color-footnote: #d0d4df;
+  --color-footer-text: #b8c0d0;
+  --color-footer-meta: #9da7bb;
+
+  /* Superfícies. */
+  --color-line: rgba(18, 24, 48, 0.18);
+  --color-surface-neutral: #f2efe9;
+  --color-surface-footer: #131b35;
+  --color-card-blue: #e2e8f0;
+  --color-card-green: #e2eadb;
+  --color-card-pink: #f4dfd6;
+  --color-floor: #d9e0d1;
+  --color-panel: #f3eddf;
+  /* Mesmo fundo das pranchas em PNG, para a imagem não deixar um retângulo visível. */
+  --color-panel-art: #f1eee8;
+  --color-window: #e4e8ef;
+  --color-settings: #e4e9e0;
+  --color-download-pending: #f1eadf;
+  --color-status-bg: #dfd8cc;
+  --color-status-ready-bg: #dfe9d4;
+
+  --animate-buzzy-bob: buzzy-bob 4.5s ease-in-out infinite;
+
+  @keyframes buzzy-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+}
+
+@utility pixelated {
+  image-rendering: pixelated;
+}
+
+/* Base e acessibilidade */
+
+@layer base {
+  :root {
+    --page-width: 1160px;
+
+    color-scheme: light;
+    color: var(--color-ink);
+    background: var(--color-cream);
+    scrollbar-color: var(--color-brand) var(--color-cream-deep);
+    accent-color: var(--color-red);
+    caret-color: var(--color-red);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* O preflight usa 1.5; o desenho original usa a entrelinha padrão do navegador. */
+    line-height: normal;
+  }
+
+  /* Evita uma palavra sozinha na última linha dos parágrafos. */
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    color: var(--color-cream);
+    background: var(--color-red);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: 4px;
+  }
+
+  /* Sobre o azul-marinho o vermelho fica abaixo de 3:1; o anel vira dourado.
+     Superfícies claras dentro de uma área escura voltam ao vermelho (regra declarada depois). */
+  [data-fundo="escuro"] :focus-visible {
+    outline-color: var(--color-gold-light);
+  }
+
+  [data-fundo="claro"] :focus-visible {
+    outline-color: var(--color-red);
+  }
+
+  /* Respeita a preferência de movimento reduzido. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+/* Peças com CSS mais elaborado */
+
+@layer components {
+  /* Largura da página, compartilhada por seções, cabeçalho e faixa. */
+  .section-wrap {
+    width: min(var(--page-width), calc(100% - 64px));
+    margin-inline: auto;
+
+    @media (max-width: 980px) {
+      width: min(var(--page-width), calc(100% - 48px));
+    }
+
+    @media (max-width: 720px) {
+      width: min(var(--page-width), calc(100% - 40px));
+    }
+
+    @media (max-width: 440px) {
+      width: calc(100% - 32px);
+    }
+  }
+
+  /* Cena de abertura: janela ao fundo, em pixel art. */
+  .scene-window {
+    position: absolute;
+    z-index: -1;
+    top: 90px;
+    right: -18px;
+    width: 180px;
+    height: 140px;
+    border: 2px solid rgba(40, 58, 95, 0.2);
+    background: rgba(255, 246, 232, 0.45);
+
+    &::before {
+      /* O CSS original não aplicava border-box aos pseudo-elementos: 15px + 1px de borda. */
+      box-sizing: content-box;
+      position: absolute;
+      inset: 0 0 auto;
+      height: 15px;
+      border-bottom: 1px solid rgba(40, 58, 95, 0.18);
+      background: rgba(239, 178, 98, 0.3);
+      content: "";
+    }
+
+    & i {
+      position: relative;
+      top: 6px;
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      margin-left: 6px;
+      border-radius: 50%;
+      background: rgba(184, 58, 55, 0.42);
+    }
+
+    & b {
+      position: relative;
+      top: 39px;
+      left: 14px;
+      display: block;
+      width: 94px;
+      height: 5px;
+      margin-bottom: 11px;
+      background: rgba(40, 58, 95, 0.1);
+    }
+
+    & b:last-child {
+      width: 62px;
+    }
+  }
+
+  /* Cena de abertura: chão com tufos de grama. */
+  .scene-floor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    height: 40px;
+    justify-content: space-around;
+    border-top: 2px solid var(--color-ink);
+    background: var(--color-floor);
+
+    & span {
+      width: 5px;
+      height: 13px;
+      background: rgba(107, 138, 52, 0.32);
+    }
+
+    & span:nth-child(2),
+    & span:nth-child(5) {
+      height: 20px;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+# Publica o site no GitHub Pages pelo GitHub Actions.
+# Requer, uma vez, Settings → Pages → Source = "GitHub Actions" (veja GUIA_GITHUB_PAGES.md).
+name: Publicar no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissões mínimas: ler o código, publicar no Pages e provar a identidade do workflow (OIDC).
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Uma publicação por vez; a que está em andamento termina antes da próxima começar.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v7
+
+      - name: Preparar o Node.js
+        uses: actions/setup-node@v7
+        with:
+          # Astro 7 exige Node 22.12 ou mais recente.
+          node-version: 24
+          cache: npm
+
+      - name: Instalar as dependências fixadas
+        run: npm ci
+
+      - name: Gerar o site
+        run: npm run build
+
+      - name: Enviar o dist/ como artefato do Pages
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,28 @@
+---
+import { caminho } from "../lib/caminho";
+
+interface Props {
+  local: "cabecalho" | "rodape";
+}
+
+const { local } = Astro.props;
+const noRodape = local === "rodape";
+---
+
+<a
+  class:list={[
+    "inline-flex flex-none items-center gap-10 font-mono font-bold leading-none tracking-[0.11em] celular:text-[16px]",
+    noRodape ? "text-[14px]" : "text-[18px]",
+  ]}
+  href="#topo"
+  aria-label={noRodape ? "Buzzy, voltar ao início" : "Buzzy, início"}
+>
+  <img
+    class:list={["object-contain pixelated celular:size-29", noRodape ? "size-27" : "size-32"]}
+    src={caminho("assets/icone-16x.png")}
+    alt=""
+    width={noRodape ? 28 : 32}
+    height={noRodape ? 28 : 32}
+  />
+  <span>BUZZY<span class="text-gold">.</span></span>
+</a>

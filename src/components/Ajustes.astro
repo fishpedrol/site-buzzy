@@ -1,0 +1,61 @@
+---
+import { caminho } from "../lib/caminho";
+import { rotulo, textoDeApoio, tituloDeSecao } from "../lib/estilos";
+
+const ajustes = [
+  { marca: "A", titulo: "Energia", texto: "Mais tranquila ou mais ativa." },
+  { marca: "B", titulo: "Tamanho", texto: "Pequeno, médio ou grande." },
+  { marca: "C", titulo: "Comportamento", texto: "Escolha como ele fica na tela." },
+];
+---
+
+<section
+  class="section-wrap pt-88 pb-112 border-t border-line celular:pt-70 celular:pb-78"
+  id="ajustes"
+  aria-labelledby="settings-title"
+>
+  <div class="grid grid-cols-3 items-end gap-24 mb-39 celular:grid-cols-1 celular:gap-13 celular:mb-27">
+    <p class={`${rotulo} col-span-full -mb-7 text-red text-[10px] celular:col-auto celular:mb-0`}>04 / DO SEU JEITO</p>
+    <h2 class={`${tituloDeSecao} text-[clamp(38px,4.6vw,54px)]`} id="settings-title">
+      Você escolhe<br /><span class="text-red">o ritmo.</span>
+    </h2>
+    <p class={`${textoDeApoio} col-start-3 justify-self-end mt-0 mb-3 celular:col-start-auto celular:justify-self-start`}>Um jeito fácil de ajustar a companhia ao seu dia.</p>
+  </div>
+
+  <div
+    class="relative grid min-h-285 grid-cols-[0.8fr_1.2fr] items-center gap-18 p-24 border-2 border-ink bg-settings tablet:px-16 celular:min-h-0 celular:grid-cols-[0.75fr_1.25fr] celular:gap-12 celular:pt-19 celular:px-13 celular:pb-20 estreito:grid-cols-1 estreito:px-9"
+  >
+    <figure
+      class="relative z-1 w-[min(100%,245px)] justify-self-center m-0 -rotate-2 border-2 border-ink bg-cream shadow-[5px_5px_0_var(--color-navy)] celular:w-[min(100%,180px)] estreito:w-[min(100%,229px)]"
+    >
+      <figcaption
+        class="flex min-h-28 items-center justify-between px-8 border-b-2 border-ink text-cream bg-navy font-mono font-bold text-[9px] leading-none tracking-[0.06em]"
+      >
+        <span>ENERGIA</span><span class="text-gold text-[7px] tracking-[0.14em]" aria-hidden="true">● ● ●</span>
+      </figcaption>
+      <img
+        class="w-full pixelated"
+        src={caminho("assets/painel-de-energia.png")}
+        alt="Painel do Buzzy com as opções de energia baixa, média e alta."
+        width="229"
+        height="179"
+        loading="lazy"
+      />
+    </figure>
+    <div class="grid col-2 gap-12 px-6 celular:grid-cols-1 celular:py-8 celular:px-3 estreito:col-auto">
+      {
+        ajustes.map((ajuste) => (
+          <div class="flex items-center gap-11">
+            <span class="grid size-28 flex-none place-items-center border border-ink text-navy bg-gold-light font-mono font-bold text-[10px] leading-none">
+              {ajuste.marca}
+            </span>
+            <span>
+              <b class="block mb-3 text-[13px]">{ajuste.titulo}</b>
+              <small class="block text-meta text-[11px] leading-[1.4]">{ajuste.texto}</small>
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,256 @@
+---
+// Download (DEC-042): o .exe é a ação principal; o código no GitHub é uma ação separada.
+// Tudo o que muda por versão vem de src/config/release.ts, lido por src/lib/release.ts.
+import { rotulo, tituloDeSecao } from "../lib/estilos";
+import { aDefinir, assinado, download, nomeDoArquivo, repositorio, zipDoCodigo } from "../lib/release";
+
+const pastaDeDados = "%LOCALAPPDATA%\\Buzzy";
+// O runtime do .NET extrai numa pasta com o nome do arquivo .exe, sem a extensão (medido no F9-P10 do projeto principal).
+const pastaDoRuntime = `%TEMP%\\.net\\${nomeDoArquivo.replace(/\.exe$/i, "")}`;
+const chaveDoInicio = "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+// O comando é partido em pedaços só para quebrar a linha nos espaços certos; o texto copiado é o mesmo.
+const arquivoNoComando = `.\\${nomeDoArquivo}`;
+
+const ficha = [
+  {
+    nome: "Versão",
+    valor: download ? `${download.versao}, de ${download.data}` : aDefinir,
+    pendente: !download,
+  },
+  { nome: "Sistema", valor: "Windows 10 (versão 1607 ou mais recente) ou Windows 11, 64 bits (x64)" },
+  { nome: "Arquivo", valor: download ? download.nomeDoArquivo : "um único .exe", dado: !!download },
+  { nome: "Tamanho", valor: download ? download.tamanho : aDefinir, pendente: !download },
+  { nome: "SHA-256", valor: download ? download.sha256 : "—", dado: !!download, pendente: !download },
+  // "Sem .NET instalado" e "sem instalador" só se afirmam com a release validada (F9-P10); antes, são a meta.
+  {
+    nome: "Pré-requisitos",
+    valor: download
+      ? "Nenhum pacote extra para baixar ou instalar: o .NET 10 e o WPF já vão dentro do .exe. Basta o Windows 10 ou 11 de 64 bits."
+      : "Planejado para não exigir nenhum pacote ou runtime instalado: o .NET 10 e o WPF vão dentro do .exe; isso é confirmado antes da primeira versão.",
+    pendente: !download,
+  },
+  {
+    nome: "Instalação",
+    valor: download ? "Sem instalador. É só abrir o arquivo." : "Planejada sem instalador: um único .exe para abrir.",
+    pendente: !download,
+  },
+  {
+    nome: "Assinatura",
+    valor: assinado
+      ? "Assinado digitalmente."
+      : "Sem assinatura digital. O Windows pode avisar antes de abrir; veja como seguir em \"Se o Windows avisar\".",
+  },
+  {
+    nome: "O que grava",
+    valor: `Suas preferências em ${pastaDeDados}. Na primeira execução, o runtime do .NET extrai 5 DLLs nativas do WPF (cerca de 8 MB) para ${pastaDoRuntime} e as reaproveita depois. Se você marcar "Iniciar com o Windows", grava o valor Buzzy em ${chaveDoInicio}, apagado quando você desmarca.`,
+  },
+  { nome: "Rede", valor: "Nenhuma. Sem conta, telemetria nem atualização automática." },
+  {
+    nome: "Para remover",
+    valor: `Desmarque "Iniciar com o Windows" nas Configurações, saia pelo menu e apague o .exe e as pastas ${pastaDeDados} e ${pastaDoRuntime}.`,
+  },
+];
+
+const cartao =
+  "flex flex-col min-h-244 py-20 px-19 border-2 border-ink text-ink celular:py-15 celular:px-13 estreito:min-h-0";
+const topoDoCartao = "flex min-h-31 items-center justify-between gap-9 mb-14";
+const icone =
+  "grid size-34 place-items-center border border-ink text-cream font-mono font-bold leading-none";
+const situacao = "py-6 px-7 font-mono font-bold text-[9px] leading-none tracking-[0.05em]";
+const tituloDoCartao = "mb-8 text-[19px] font-bold tracking-[-0.03em] text-balance celular:text-[17px]";
+const textoDoCartao = "mb-16 text-muted text-[12px] leading-[1.55]";
+const botao =
+  "inline-flex min-h-42 w-full items-center justify-center gap-10 px-12 border-2 text-[12px] font-bold text-center";
+const notaDoBotao = "mt-8 mb-0 text-status text-[11px] leading-[1.45]";
+const tituloDoQuadro = `${rotulo} mb-9 text-red text-[9px] uppercase`;
+---
+
+<section class="border-y-2 border-ink text-cream bg-navy" id="download" aria-labelledby="download-title" data-fundo="escuro">
+  <div
+    class="section-wrap grid grid-cols-[0.78fr_1.22fr] gap-x-[clamp(35px,7vw,93px)] gap-y-34 pt-83 pb-85 tablet:grid-cols-[0.65fr_1.35fr] tablet:gap-x-25 celular:grid-cols-1 celular:gap-26 celular:py-62"
+  >
+    <div>
+      <p class={`${rotulo} mb-19 text-gold-light text-[10px]`}>05 / LEVE O BUZZY COM VOCÊ</p>
+      <h2 class={`${tituloDeSecao} mb-18 text-[clamp(41px,4.7vw,57px)]`} id="download-title">
+        Um cantinho<br />mais <span class="text-gold-light">animado.</span>
+      </h2>
+      <p class="max-w-340 mb-0 text-on-navy text-[13px] leading-[1.65] celular:max-w-480">
+        {
+          download
+            ? "Um único arquivo .exe para Windows 10 ou 11 (64 bits), com tudo dentro: não precisa baixar nem instalar mais nada. Baixe, abra, e o Buzzy aparece no seu desktop."
+            : "O Buzzy vai chegar como um único arquivo .exe para Windows 10 ou 11 (64 bits), com tudo dentro: sem pacote ou runtime para instalar. A primeira versão ainda não foi publicada; o botão fica disponível quando ela estiver pronta e conferida."
+        }
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-14 celular:gap-10 estreito:grid-cols-1">
+      <article class:list={[cartao, download ? "bg-cream" : "bg-download-pending"]} aria-labelledby="exe-title" data-fundo="claro">
+        <div class={topoDoCartao}>
+          <span class={`${icone} bg-red text-[18px]`} aria-hidden="true">↓</span>
+          {
+            download ? (
+              <span class={`${situacao} text-green-dark bg-status-ready-bg`}>VERSÃO {download.versao}</span>
+            ) : (
+              <span class={`${situacao} text-status bg-status-bg`}>AINDA NÃO PUBLICADO</span>
+            )
+          }
+        </div>
+        <h3 class={tituloDoCartao} id="exe-title">Buzzy para Windows</h3>
+        <p class={textoDoCartao}>
+          {download ? "Um único .exe para Windows 10 ou 11 (64 bits), sem instalador e sem pacotes extras." : "Planejado como um único .exe para Windows 10 ou 11 (64 bits), sem instalador e sem pacotes extras."}
+        </p>
+        <div class="mt-auto">
+          {
+            download ? (
+              <>
+                <a
+                  class={`${botao} border-ink text-cream bg-red shadow-[3px_3px_0_var(--color-ink)] transition-[translate,box-shadow,background] duration-150 ease-[ease] hover:translate-x-2 hover:translate-y-2 hover:bg-red-dark hover:shadow-[1px_1px_0_var(--color-ink)]`}
+                  href={download.url}
+                  download={download.nomeDoArquivo}
+                  aria-describedby="exe-arquivo"
+                >
+                  Baixar Buzzy para Windows <span class="text-[15px]" aria-hidden="true">↓</span>
+                </a>
+                <p class={`${notaDoBotao} font-mono break-all`} id="exe-arquivo">
+                  {download.nomeDoArquivo} · {download.tamanho.split(" (")[0]}
+                </p>
+              </>
+            ) : (
+              <>
+                <button
+                  class={`${botao} border-dashed border-ink/40 text-disabled bg-ink/[0.035] cursor-not-allowed`}
+                  type="button"
+                  disabled
+                  aria-describedby="exe-situacao"
+                >
+                  Baixar Buzzy para Windows
+                </button>
+                <p class={notaDoBotao} id="exe-situacao">
+                  Ainda não há versão publicada.
+                </p>
+              </>
+            )
+          }
+        </div>
+      </article>
+
+      <article class={`${cartao} bg-cream`} aria-labelledby="codigo-title" data-fundo="claro">
+        <div class={topoDoCartao}>
+          <span class={`${icone} bg-brand text-[10px]`} aria-hidden="true">&lt;/&gt;</span>
+          <span class={`${situacao} text-green-dark bg-status-ready-bg`}>NO GITHUB</span>
+        </div>
+        <h3 class={tituloDoCartao} id="codigo-title">Código-fonte</h3>
+        <p class={textoDoCartao}>Código, testes e documentação, para ler ou compilar.</p>
+        <div class="mt-auto">
+          <a
+            class={`${botao} border-ink text-ink bg-transparent transition-[background] duration-150 ease-[ease] hover:bg-gold-light`}
+            href={repositorio}
+          >
+            Ver código-fonte no GitHub <span class="text-[14px]" aria-hidden="true">↗</span>
+          </a>
+          <p class={notaDoBotao}>
+            Ou <a class="text-brand font-bold underline underline-offset-3 hover:text-red" href={zipDoCodigo}
+              >baixe o código em ZIP</a
+            >.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <section
+      class="col-span-full border-2 border-ink text-ink bg-cream shadow-[7px_7px_0_var(--color-gold)] celular:shadow-[5px_5px_0_var(--color-gold)]"
+      aria-labelledby="ficha-title"
+      data-fundo="claro"
+    >
+      <div
+        class="flex min-h-34 items-center justify-between gap-12 px-16 border-b-2 border-ink bg-gold font-mono font-bold text-[9px] leading-none tracking-[0.1em] celular:px-12"
+      >
+        <h3 class="m-0 text-[inherit] font-[inherit] uppercase" id="ficha-title">Ficha da versão</h3>
+        <span class="text-brand">{download ? `v${download.versao}` : "PLANEJADA"}</span>
+      </div>
+
+      <div class="grid grid-cols-[1.3fr_0.7fr] tablet:grid-cols-1">
+        <div class="py-18 px-22 celular:py-14 celular:px-13">
+          {
+            !download && (
+              <p class="mb-12 text-body text-[12px] leading-[1.55]">
+                Assim será a primeira versão. Versão, tamanho e SHA-256 entram aqui quando ela for publicada.
+              </p>
+            )
+          }
+          <dl class="m-0 border-t border-line">
+            {
+              ficha.map((linha) => (
+                <div class="grid grid-cols-[118px_1fr] gap-14 py-9 border-b border-line celular:grid-cols-1 celular:gap-3">
+                  <dt class="font-mono font-bold text-brand text-[10px] leading-[1.6] tracking-[0.04em] uppercase">
+                    {linha.nome}
+                  </dt>
+                  <dd
+                    class:list={[
+                      "m-0 text-[12px] leading-[1.55] [overflow-wrap:anywhere]",
+                      linha.pendente ? "text-status italic" : "text-ink",
+                      linha.dado && "font-mono text-[11px] break-all",
+                    ]}
+                  >
+                    {linha.valor}
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <div
+          class="grid content-start gap-20 py-18 px-20 border-l-2 border-ink bg-panel tablet:border-l-0 tablet:border-t-2 celular:py-16 celular:px-13"
+        >
+          <div>
+            <h4 class={tituloDoQuadro}>Confira o arquivo</h4>
+            <p class="mb-9 text-body text-[11px] leading-[1.55]">
+              Antes de abrir, compare o SHA-256 no PowerShell, na pasta do download. O resultado tem de ser igual ao da
+              ficha.
+            </p>
+            <code
+              class="block py-10 px-11 border border-ink text-cream bg-ink font-mono text-[11px] leading-[1.5]"
+              ><span>Get-FileHash </span><span class="break-all">{arquivoNoComando}</span>{" "}<span
+                class="whitespace-nowrap">-Algorithm SHA256</span
+              ></code
+            >
+          </div>
+
+          {
+            !assinado && (
+              <div>
+                <h4 class={tituloDoQuadro}>Se o Windows avisar</h4>
+                <p class="mb-8 text-body text-[11px] leading-[1.55]">
+                  Sem assinatura, o SmartScreen pode mostrar "O Windows protegeu o computador". Com o SHA-256 conferido:
+                </p>
+                <ol class="grid gap-6 m-0 p-0 list-none text-ink text-[11px] leading-[1.45]">
+                  <li class="flex gap-8">
+                    <span class="grid size-18 flex-none place-items-center bg-navy text-gold-light font-mono font-bold text-[9px]">
+                      1
+                    </span>
+                    <span>
+                      Clique em <b>Mais informações</b>.
+                    </span>
+                  </li>
+                  <li class="flex gap-8">
+                    <span class="grid size-18 flex-none place-items-center bg-navy text-gold-light font-mono font-bold text-[9px]">
+                      2
+                    </span>
+                    <span>
+                      Clique em <b>Executar assim mesmo</b>.
+                    </span>
+                  </li>
+                </ol>
+                <p class="mt-10 mb-0 text-meta text-[11px] leading-[1.5]">
+                  Se o Controle Inteligente de Aplicativos (Smart App Control) estiver ligado, o Windows pode bloquear o
+                  arquivo sem oferecer essa opção.
+                </p>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

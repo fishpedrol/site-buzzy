@@ -1,0 +1,27 @@
+---
+import "../styles/global.css";
+import { caminho } from "../lib/caminho";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1b2748" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href={caminho("assets/icone-16x.png")} />
+  </head>
+
+  <body class="min-w-320 bg-cream">
+    <slot />
+  </body>
+</html>

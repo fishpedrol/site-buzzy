@@ -1,0 +1,106 @@
+---
+import { caminho } from "../lib/caminho";
+import { rotulo } from "../lib/estilos";
+
+const fatos = [
+  { cor: "bg-gold", texto: "Feito para Windows 10 e 11" },
+  { cor: "bg-green", texto: "Roda localmente" },
+  { cor: "bg-red", texto: "Não verbal" },
+];
+---
+
+<section
+  class="section-wrap grid min-h-618 grid-cols-[1.04fr_0.96fr] items-center gap-[clamp(36px,7vw,92px)] pt-68 pb-72 largo:min-h-660 tablet:min-h-560 tablet:gap-34 celular:grid-cols-1 celular:gap-37 celular:pt-60 celular:pb-58"
+  aria-labelledby="hero-title"
+>
+  <div class="celular:max-w-590">
+    <p class={`${rotulo} mb-19 text-red text-[10px]`}>
+      <span class="inline-block size-8 mr-8 bg-red shadow-[3px_3px_0_var(--color-gold)]" aria-hidden="true"></span> UM MASCOTE PARA WINDOWS
+    </p>
+    <h1
+      class="mb-20 text-[clamp(48px,6.5vw,77px)] font-[750] leading-[0.99] tracking-[-0.065em] text-balance celular:text-[clamp(48px,12vw,69px)]"
+      id="hero-title"
+    >
+      Um companheiro<br />em <span class="text-red">pixels.</span>
+    </h1>
+    <p class="max-w-510 mb-25 text-intro text-[17px] leading-[1.7] celular:max-w-560 celular:text-[16px]">
+      Buzzy é um macaquinho de chapéu de palha que passeia pelo seu desktop. Ele pula, escala e descansa por ali — sem
+      pedir o centro das atenções.
+    </p>
+    <div class="flex flex-wrap items-center gap-23 estreito:flex-col estreito:items-start estreito:gap-18">
+      <a
+        class="inline-flex min-h-50 items-center justify-center gap-16 px-17 border-2 border-ink text-cream bg-red text-[13px] font-bold shadow-[4px_4px_0_var(--color-ink)] transition-[translate,box-shadow,background] duration-150 ease-[ease] hover:translate-x-3 hover:translate-y-3 hover:bg-red-dark hover:shadow-[1px_1px_0_var(--color-ink)]"
+        href="#download"
+        >Baixar para Windows <span class="text-[17px]" aria-hidden="true">↘</span></a
+      >
+      <a class="group/link inline-flex items-center gap-9 py-13 -my-13 text-brand text-[13px] font-bold hover:text-red transition-[color] duration-160 ease-[ease]" href="#movimento"
+        >Conheça o Buzzy <span
+          class="transition-[translate] duration-160 ease-[ease] group-hover/link:translate-x-3"
+          aria-hidden="true">→</span
+        ></a
+      >
+    </div>
+    <ul
+      class="flex flex-wrap gap-x-23 gap-y-14 mt-40 text-meta font-mono text-[11px] leading-[1.5] tablet:gap-x-14 tablet:gap-y-11 estreito:mt-30 estreito:text-[10px]"
+      aria-label="Sobre o Buzzy"
+    >
+      {
+        fatos.map((fato) => (
+          <li class="inline-flex items-center gap-8">
+            <i class={`inline-block size-8 ${fato.cor}`} aria-hidden="true" /> {fato.texto}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div
+    class="relative isolate grid min-h-460 place-items-center overflow-hidden border-2 border-ink bg-surface-neutral shadow-[9px_9px_0_var(--color-navy)] tablet:min-h-405 celular:w-[calc(100%-8px)] celular:min-h-[min(110vw,430px)] celular:justify-self-center"
+  >
+    <div
+      class="absolute z-2 inset-x-0 top-0 flex min-h-36 items-center justify-between px-14 text-cream bg-navy font-mono font-bold text-[9px] leading-none tracking-[0.1em] estreito:px-10 estreito:text-[8px]"
+    >
+      <span>UMA PRESENÇA LEVE NO SEU DESKTOP</span>
+      <span class="text-gold-light" aria-hidden="true">01—01</span>
+    </div>
+    <div class="scene-window" aria-hidden="true">
+      <i></i>
+      <i></i>
+      <i></i>
+      <b></b>
+      <b></b>
+      <b></b>
+    </div>
+    <div
+      class="absolute -z-1 top-102 left-47 size-96 border-2 border-ink/12 rounded-full bg-gold-light celular:top-80 celular:left-[9%] celular:size-76"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="absolute z-2 top-117 left-51 text-red text-[22px]" aria-hidden="true">✳</div>
+    <div class="absolute z-2 top-208 right-57 text-green text-[17px]" aria-hidden="true">✳</div>
+    <img
+      class="relative z-1 w-[min(76%,356px)] mt-15 [filter:drop-shadow(8px_7px_0_rgba(18,24,48,0.1))] pixelated animate-buzzy-bob celular:w-[min(72%,315px)]"
+      src={caminho("assets/parado-8x-recorte.png")}
+      alt="Buzzy, um macaquinho em pixel art com chapéu de palha e faixa vermelha."
+      width="512"
+      height="512"
+    />
+    <div class="scene-floor" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div
+      class="absolute z-2 bottom-52 left-15 flex items-center gap-8 text-brand font-mono font-bold text-[9px] leading-none tracking-[0.09em] estreito:left-10 estreito:text-[8px]"
+    >
+      <span class="size-7 bg-red" aria-hidden="true"></span>
+      SEU NOVO VIZINHO DE TELA
+    </div>
+    <span
+      class="absolute right-14 bottom-51 text-muted font-mono text-[10px] leading-[1.5] text-right estreito:right-10 estreito:text-[9px]"
+      >feito de<br />pixels&nbsp;<span aria-hidden="true">▧</span></span
+    >
+  </div>
+</section>

@@ -1,0 +1,17 @@
+{
+  "name": "site-buzzy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Site de apresentação do Buzzy, mascote de desktop para Windows 11.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.3.5",
+    "tailwindcss": "4.3.3"
+  }
+}

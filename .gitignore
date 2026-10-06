@@ -1,10 +1,12 @@
-# Preserve apenas o README entre os arquivos Markdown.
+# Preserve apenas o README e o guia do GitHub Pages entre os arquivos Markdown.
 *.md
 !/README.md
+!/GUIA_GITHUB_PAGES.md
 
 # Dependências e saídas de build.
 node_modules/
 dist/
+.astro/
 .vite/
 .cache/
 coverage/

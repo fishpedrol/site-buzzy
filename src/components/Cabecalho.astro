@@ -1,0 +1,100 @@
+---
+import Marca from "./Marca.astro";
+import { transicaoDeCor } from "../lib/estilos";
+
+const links = [
+  { href: "#movimento", texto: "O Buzzy" },
+  { href: "#privacidade", texto: "Privacidade" },
+  { href: "#ajustes", texto: "Ajustes" },
+];
+// No desktop, o preenchimento com margem negativa amplia a área de toque para 44px sem mexer no layout.
+const estiloDoLink = `${transicaoDeCor} py-13 -my-13 hover:text-gold-light celular:px-5 celular:py-13 celular:my-0 celular:border-t celular:border-cream/12`;
+---
+
+<a
+  class="fixed z-20 top-12 left-12 px-16 py-12 -translate-y-[160%] border-2 border-gold text-cream bg-navy focus:translate-y-0 focus-visible:outline-gold-light"
+  href="#conteudo">Pular para o conteúdo</a
+>
+
+<header class="group relative z-10 text-cream bg-navy" id="topo" data-cabecalho data-fundo="escuro">
+  <div class="section-wrap flex min-h-78 items-center gap-38 tablet:gap-23 celular:min-h-70 celular:gap-13 estreito:gap-9">
+    <Marca local="cabecalho" />
+
+    <button
+      class="hidden celular:flex celular:size-44 celular:flex-col celular:items-center celular:justify-center celular:gap-5 celular:ml-auto celular:border celular:border-cream/36 celular:bg-transparent celular:cursor-pointer"
+      type="button"
+      aria-label="Abrir navegação"
+      aria-expanded="false"
+      aria-controls="navegacao"
+      data-menu-botao
+    >
+      <span class="w-17 h-2 bg-cream"></span>
+      <span class="w-17 h-2 bg-cream"></span>
+      <span class="w-17 h-2 bg-cream"></span>
+    </button>
+
+    <nav
+      class="flex items-center gap-[clamp(18px,3vw,38px)] ml-auto text-nav text-[13px] celular:absolute celular:top-70 celular:inset-x-0 celular:hidden celular:items-stretch celular:gap-0 celular:m-0 celular:pt-8 celular:px-20 celular:pb-17 celular:border-b celular:border-cream/20 celular:bg-navy celular:group-data-[menu-open=true]:grid"
+      id="navegacao"
+      aria-label="Navegação principal"
+    >
+      {links.map((link) => <a class={estiloDoLink} href={link.href}>{link.texto}</a>)}
+      <a class={`hidden celular:block ${estiloDoLink}`} href="#download">Baixar</a>
+    </nav>
+    <a
+      class="inline-flex items-center gap-13 px-14 py-11 border border-gold text-gold-light text-[12px] font-bold tracking-[0.02em] transition-[background,color] duration-160 ease-[ease] hover:text-navy hover:bg-gold celular:gap-8 celular:px-11 celular:py-10 celular:text-[11px] estreito:text-[10px]"
+      href="#download"
+    >
+      Baixar <span class="text-[17px] leading-[0.6]" aria-hidden="true">↘</span>
+    </a>
+  </div>
+  <div class="h-8 border-b-3 border-red bg-gold" aria-hidden="true"><span></span></div>
+</header>
+
+<script>
+  // Navegação de celular: abre e fecha o menu, fecha ao escolher um link e com Esc.
+  function iniciarNavegacao() {
+    const cabecalho = document.querySelector("[data-cabecalho]");
+    const botao = document.querySelector("[data-menu-botao]");
+    const navegacao = document.querySelector("#navegacao");
+
+    if (
+      !(cabecalho instanceof HTMLElement) ||
+      !(botao instanceof HTMLButtonElement) ||
+      !(navegacao instanceof HTMLElement)
+    ) {
+      return;
+    }
+
+    function definirMenuAberto(aberto: boolean, { devolverFoco = false } = {}) {
+      cabecalho!.dataset.menuOpen = String(aberto);
+      botao!.setAttribute("aria-expanded", String(aberto));
+      botao!.setAttribute("aria-label", aberto ? "Fechar navegação" : "Abrir navegação");
+
+      if (devolverFoco) {
+        botao!.focus();
+      }
+    }
+
+    botao.addEventListener("click", () => {
+      const aberto = botao.getAttribute("aria-expanded") === "true";
+      definirMenuAberto(!aberto);
+    });
+
+    navegacao.addEventListener("click", (evento) => {
+      if (evento.target instanceof Element && evento.target.closest("a")) {
+        definirMenuAberto(false);
+      }
+    });
+
+    document.addEventListener("keydown", (evento) => {
+      const menuAberto = cabecalho.dataset.menuOpen === "true";
+
+      if (evento.key === "Escape" && menuAberto) {
+        definirMenuAberto(false, { devolverFoco: true });
+      }
+    });
+  }
+
+  iniciarNavegacao();
+</script>

@@ -1,0 +1,101 @@
+---
+import { caminho } from "../lib/caminho";
+import { rotulo, tamanhoDoTitulo, textoDeApoio, tituloDeSecao } from "../lib/estilos";
+
+const recursos = [
+  {
+    fundo: "bg-cream-deep",
+    glifo: "↗",
+    corDoGlifo: "text-ink bg-gold",
+    titulo: "Anda e escala",
+    texto: "Passeia pelo chão da tela e sobe pelas laterais quando bate a vontade.",
+  },
+  {
+    fundo: "bg-card-blue",
+    glifo: "✳",
+    corDoGlifo: "text-cream bg-blue",
+    titulo: "Pula por aí",
+    texto: "Quica, se pendura no cipó e pode atravessar de um monitor para outro.",
+  },
+  {
+    fundo: "bg-card-green",
+    glifo: "⌁",
+    corDoGlifo: "text-cream bg-green",
+    titulo: "Reage a você",
+    texto: "Um clique pode surpreender. Dois cliques e ele se esconde na borda.",
+  },
+  {
+    fundo: "bg-card-pink",
+    glifo: "◡",
+    corDoGlifo: "text-cream bg-red",
+    titulo: "Tem seu ritmo",
+    texto: "Fica mais tranquilo ou mais agitado conforme a energia que você escolher.",
+  },
+];
+---
+
+<section class="section-wrap pt-104 pb-96 celular:pt-74 celular:pb-70" id="movimento" aria-labelledby="features-title">
+  <div class="flex items-end justify-between gap-40 mb-37 celular:block celular:mb-28">
+    <div>
+      <p class={`${rotulo} mb-15 text-red text-[10px]`}>01 / MOVIMENTO</p>
+      <h2 class={`${tituloDeSecao} ${tamanhoDoTitulo}`} id="features-title">Ele não fica<br /><span class="text-red">parado.</span></h2>
+    </div>
+    <p class={`${textoDeApoio} mt-0 mb-4 celular:mt-18`}>
+      Buzzy transforma um cantinho da tela num pequeno palco. Cada passeio tem um pouco de surpresa.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-4 gap-13 tablet:grid-cols-2 celular:gap-10">
+    {
+      recursos.map((recurso, indice) => (
+        <article
+          class={`relative min-h-240 pt-22 px-19 pb-21 border-2 border-ink ${recurso.fundo} transition-[translate,box-shadow] duration-180 ease-[ease] hover:-translate-y-4 hover:shadow-[4px_4px_0_var(--color-ink)] tablet:min-h-208 celular:min-h-216 celular:py-17 celular:px-14 estreito:min-h-220`}
+        >
+          <span class="absolute top-25 right-21 text-count font-mono text-[11px] leading-none celular:top-20 celular:right-15" aria-hidden="true">
+            {String(indice + 1).padStart(2, "0")}
+          </span>
+          <span
+            class={`grid size-43 place-items-center mb-35 border-2 border-ink ${recurso.corDoGlifo} font-mono font-bold text-[22px] leading-none tablet:mb-25 celular:size-39 celular:mb-27`}
+            aria-hidden="true"
+          >
+            {recurso.glifo}
+          </span>
+          <h3 class="mb-8 text-[18px] font-bold tracking-[-0.025em] text-balance celular:text-[16px]">{recurso.titulo}</h3>
+          <p class="max-w-235 mb-0 text-body text-[12px] leading-[1.65] celular:text-[11px] estreito:leading-[1.5]">
+            {recurso.texto}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+
+  <div
+    class="grid min-h-335 grid-cols-[0.73fr_1.27fr] items-stretch mt-26 overflow-hidden border-2 border-ink bg-panel celular:grid-cols-1"
+  >
+    <div class="flex flex-col items-start justify-center py-34 px-36 celular:pt-28 celular:px-22 celular:pb-20">
+      <p class={`${rotulo} mb-17 text-red text-[9px]`}>UM MUNDO PEQUENO, CHEIO DE AÇÃO</p>
+      <h3 class="mb-15 text-[33px] font-bold leading-[1.05] tracking-[-0.05em] text-balance celular:text-[30px]">
+        Passa, pula,<br />dá uma espiada.
+      </h3>
+      <p class="max-w-265 mb-0 text-muted text-[13px] leading-[1.6]">
+        Quando a tela precisa ser toda sua, Buzzy sabe sair do caminho.
+      </p>
+    </div>
+    <div
+      class="relative grid min-w-0 items-center justify-items-center overflow-hidden border-l-2 border-ink bg-panel-art celular:min-h-240 celular:border-t-2 celular:border-l-0"
+    >
+      <img
+        class="w-full max-h-330 object-contain pixelated celular:max-h-270"
+        src={caminho("assets/poses-claro.png")}
+        alt="Prancha com poses do Buzzy: andando, pulando, descansando e pendurado no cipó."
+        width="1606"
+        height="1430"
+        loading="lazy"
+      />
+      <span
+        class="absolute right-14 bottom-13 py-7 px-9 border border-ink text-cream bg-navy font-mono font-bold text-[9px] leading-none tracking-[0.07em]"
+        >ANIMAÇÕES EM PIXEL ART</span
+      >
+    </div>
+  </div>
+</section>

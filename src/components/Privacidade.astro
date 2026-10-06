@@ -1,0 +1,86 @@
+---
+import { caminho } from "../lib/caminho";
+import { rotulo, tituloDeSecao } from "../lib/estilos";
+
+const pontos = [
+  { icone: "⌂", titulo: "Fica no seu computador", texto: "Sem conta e sem enviar seus dados para serviços." },
+  { icone: "□", titulo: "Não captura a tela", texto: "Não lê o conteúdo de outros programas." },
+  { icone: "↙", titulo: "Você decide o espaço", texto: "Arraste ou esconda Buzzy quando quiser." },
+];
+
+const cartao = "absolute h-215 border-2 border-ink";
+const linhasDaJanela = ["w-[62%]", "w-[82%]", "w-[48%]"];
+---
+
+<section
+  class="section-wrap grid min-h-605 grid-cols-[130px_1fr_0.78fr] items-center gap-[clamp(28px,5vw,66px)] py-108 tablet:grid-cols-[82px_1fr_0.68fr] tablet:gap-26 celular:grid-cols-1 celular:gap-21 celular:py-72"
+  id="privacidade"
+  aria-labelledby="privacy-title"
+>
+  <div
+    class="flex size-96 flex-col items-center justify-center gap-5 -rotate-8 border-2 border-green rounded-full text-green font-mono font-bold text-[8px] leading-none tracking-[0.07em] tablet:size-76 celular:size-67 celular:justify-self-end celular:-mb-87 estreito:size-58 estreito:-mb-77 estreito:text-[7px]"
+    aria-hidden="true"
+  >
+    <span>LOCAL</span><b class="text-[29px] leading-[0.9] estreito:text-[23px]">◎</b><span>NO SEU PC</span>
+  </div>
+
+  <div class="celular:relative celular:z-1">
+    <p class={`${rotulo} mb-15 text-red text-[10px]`}>03 / CURIOSIDADE COM LIMITES</p>
+    <h2
+      class={`${tituloDeSecao} mb-19 text-[clamp(38px,4.4vw,53px)] celular:text-[clamp(38px,10vw,51px)]`}
+      id="privacy-title"
+    >
+      Curioso,<br /><span class="text-red">não bisbilhoteiro.</span>
+    </h2>
+    <p class="max-w-510 mb-22 text-body text-[14px] leading-[1.7]">
+      Buzzy pode se aproximar da janela que você está usando. Para isso, consulta apenas a posição e o monitor — não lê
+      títulos, textos nem o conteúdo da tela.
+    </p>
+    <div class="border-t border-line">
+      {
+        pontos.map((ponto) => (
+          <div class="flex items-center gap-13 py-20 border-b border-line">
+            <span
+              class="grid size-33 flex-none place-items-center border border-green text-green font-mono font-bold text-[16px] leading-none"
+              aria-hidden="true"
+            >
+              {ponto.icone}
+            </span>
+            <p class="m-0">
+              <b class="block mb-3 text-[13px]">{ponto.titulo}</b>
+              <small class="block text-meta text-[11px] leading-[1.4]">{ponto.texto}</small>
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="relative grid min-h-380 place-items-center celular:min-h-330" aria-hidden="true">
+    {/* O cartão de trás é 40 px mais estreito quando a coluna é apertada: deslocado e girado, ele passaria da borda da janela e a página rolaria na horizontal. */}
+    <div class={`${cartao} w-[min(100%_-_40px,280px)] [transform:translate(19px,-15px)_rotate(6deg)] bg-gold`}>
+      <i class="relative top-26 inline-block size-7 ml-10 rounded-full bg-red"></i><i
+        class="relative top-26 inline-block size-7 ml-10 rounded-full bg-red"></i><i
+        class="relative top-26 inline-block size-7 ml-10 rounded-full bg-red"></i>
+    </div>
+    <div class={`${cartao} z-1 w-[min(100%,280px)] p-16 [transform:rotate(-4deg)] bg-window`}>
+      <span class="block mb-21 text-brand font-mono font-bold text-[9px] leading-none tracking-[0.08em]">SUA JANELA</span>
+      {linhasDaJanela.map((largura) => <b class={`block ${largura} h-7 mb-11 bg-[rgba(40,58,95,0.16)]`} />)}
+      <span class="absolute right-13 bottom-11 text-green font-mono font-bold text-[21px] leading-none">▣</span>
+    </div>
+    <div class="absolute z-2 right-0 bottom-18 w-95 h-120 overflow-hidden">
+      <img
+        class="absolute -bottom-25 -left-14 w-122 max-w-none pixelated"
+        src={caminho("assets/parado-8x-recorte.png")}
+        alt=""
+        width="512"
+        height="512"
+        loading="lazy"
+      />
+    </div>
+    <span class="absolute top-4 right-18 text-red text-[29px]">✳</span>
+    <span class="absolute bottom-0 left-3 text-green-dark font-mono font-bold text-[10px] leading-[1.5]"
+      >só a posição.<br />nada do conteúdo.</span
+    >
+  </div>
+</section>
