@@ -28,18 +28,18 @@
  * desativado. A versão pública (a de cima) não tem as drogas ilícitas.
  */
 export const releaseCompleta: ArquivoDaRelease = {
-  versao: "0.1.2",
-  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.2/Buzzy-0.1.2-completo-win-x64.exe",
-  tamanhoEmBytes: 61971973,
-  sha256: "316F3C33D9ED73DEC3865F5088CC690A3E63C8F66D59046962DF7B7BE2DEDEBD",
+  versao: "0.1.3",
+  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.3/Buzzy-0.1.3-completo-win-x64.exe",
+  tamanhoEmBytes: 61974291,
+  sha256: "90D91B740A416B7AA5007A1B91589F10C71772C7DE6FBFFCEEF8DC96D88A6AC0",
   dataDaVersao: "2026-10-06",
 };
 
 export const release: Release = {
-  versao: "0.1.2",
-  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.2/Buzzy-0.1.2-win-x64.exe",
-  tamanhoEmBytes: 61971981,
-  sha256: "63D6C5EFF789A491385A2F280033478A7F980DD1C320BC261537601B0ADDFFE6",
+  versao: "0.1.3",
+  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.3/Buzzy-0.1.3-win-x64.exe",
+  tamanhoEmBytes: 61974286,
+  sha256: "E981D00818EEB7EDEF50CA46AA29059CF23628C9B140C5375D16F0B866008CE8",
   assinado: false,
   dataDaVersao: "2026-10-06",
   validacaoWindowsLimpoPendente: true,
