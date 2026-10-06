@@ -5,9 +5,11 @@ import { caminho } from "../lib/caminho";
 interface Props {
   title: string;
   description: string;
+  /** Falso pede aos buscadores para não indexar nem seguir a página (a da edição completa, DEC-044). */
+  indexar?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, indexar = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,6 +19,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#1b2748" />
     <meta name="description" content={description} />
+    {!indexar && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <title>{title}</title>
     <link rel="icon" type="image/png" href={caminho("assets/icone-16x.png")} />
   </head>

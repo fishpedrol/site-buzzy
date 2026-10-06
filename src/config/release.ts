@@ -22,11 +22,24 @@
  * Com `urlDoDownload` preenchida, o build falha se faltar versão, tamanho, SHA-256 ou data,
  * para o site nunca oferecer um download sem os dados de conferência.
  */
+/**
+ * A edição completa (DEC-044): o mesmo formato, com o .exe "Buzzy-<versão>-completo-win-x64.exe", oferecido só na página
+ * separada /ilicitas/, que não tem link no site nem é indexada. Enquanto `urlDoDownload` for `null`, o botão de lá fica
+ * desativado. A versão pública (a de cima) não tem as drogas ilícitas.
+ */
+export const releaseCompleta: ArquivoDaRelease = {
+  versao: "0.1.2",
+  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.2/Buzzy-0.1.2-completo-win-x64.exe",
+  tamanhoEmBytes: 61971973,
+  sha256: "316F3C33D9ED73DEC3865F5088CC690A3E63C8F66D59046962DF7B7BE2DEDEBD",
+  dataDaVersao: "2026-10-06",
+};
+
 export const release: Release = {
-  versao: "0.1.1",
-  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.1/Buzzy-0.1.1-win-x64.exe",
-  tamanhoEmBytes: 61971132,
-  sha256: "600957A9981DDA2645C9DDF56417C4D34038A5D1FD11B6E010C79CF7D2308EC0",
+  versao: "0.1.2",
+  urlDoDownload: "https://github.com/fishpedrol/Buzzy/releases/download/v0.1.2/Buzzy-0.1.2-win-x64.exe",
+  tamanhoEmBytes: 61971981,
+  sha256: "63D6C5EFF789A491385A2F280033478A7F980DD1C320BC261537601B0ADDFFE6",
   assinado: false,
   dataDaVersao: "2026-10-06",
   validacaoWindowsLimpoPendente: true,
@@ -40,6 +53,15 @@ export const release: Release = {
   /** ZIP do código gerado pelo GitHub a partir da branch principal. */
   urlDoZipDoCodigo: "https://github.com/fishpedrol/Buzzy/archive/refs/heads/main.zip",
 };
+
+/** Os dados de conferência de um .exe publicado. */
+export interface ArquivoDaRelease {
+  versao: string | null;
+  urlDoDownload: string | null;
+  tamanhoEmBytes: number | null;
+  sha256: string | null;
+  dataDaVersao: string | null;
+}
 
 export interface Release {
   versao: string | null;

@@ -1,0 +1,32 @@
+---
+// A página separada da edição completa (DEC-044): o mesmo site, com o download da edição que tem as drogas ilícitas.
+// Nenhuma página tem link para cá, e ela pede aos buscadores para não ser indexada; quem chega é quem tem o endereço.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Cabecalho from "../components/Cabecalho.astro";
+import Heroi from "../components/Heroi.astro";
+import Faixa from "../components/Faixa.astro";
+import Movimento from "../components/Movimento.astro";
+import Personalidade from "../components/Personalidade.astro";
+import Privacidade from "../components/Privacidade.astro";
+import Ajustes from "../components/Ajustes.astro";
+import Download from "../components/Download.astro";
+import Rodape from "../components/Rodape.astro";
+---
+
+<BaseLayout
+  indexar={false}
+  title="Buzzy — edição completa"
+  description="Conheça o Buzzy: um mascote em pixel art que passeia pelo desktop Windows, com curiosidade e espaço para você."
+>
+  <Cabecalho />
+  <main id="conteudo">
+    <Heroi />
+    <Faixa />
+    <Movimento />
+    <Personalidade />
+    <Privacidade />
+    <Ajustes />
+    <Download edicao="completa" />
+  </main>
+  <Rodape />
+</BaseLayout>

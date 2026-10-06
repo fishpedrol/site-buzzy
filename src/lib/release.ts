@@ -1,6 +1,6 @@
 // Lê src/config/release.ts, confere os dados e prepara os textos da seção de download.
 // Nada aqui inventa valor: o que não está na configuração vira "a definir na primeira versão".
-import { release } from "../config/release";
+import { release, releaseCompleta, type ArquivoDaRelease } from "../config/release";
 
 export const aDefinir = "a definir na primeira versão";
 
@@ -33,8 +33,8 @@ function formatarData(iso: string): string {
 }
 
 /** O download só existe com todos os dados de conferência; meio preenchido, o build para. */
-function montarDownload(): Download | null {
-  const { urlDoDownload, versao, tamanhoEmBytes, sha256, dataDaVersao } = release;
+function montarDownload(dados: ArquivoDaRelease): Download | null {
+  const { urlDoDownload, versao, tamanhoEmBytes, sha256, dataDaVersao } = dados;
   if (urlDoDownload === null) return null;
 
   let url: URL;
@@ -68,10 +68,11 @@ function montarDownload(): Download | null {
 }
 
 /** `null` enquanto não houver release publicada: o botão fica desativado. */
-export const download = montarDownload();
+export const download = montarDownload(release);
 
-/** Nome usado no comando de conferência do SHA-256. */
-export const nomeDoArquivo = download?.nomeDoArquivo ?? "Buzzy-<versão>-win-x64.exe";
+/** A edição completa (DEC-044), só na página separada; `null` enquanto não houver release dela. */
+export const downloadCompleto = montarDownload(releaseCompleta);
+
 
 export const assinado = release.assinado;
 export const validacaoWindowsLimpoPendente = release.validacaoWindowsLimpoPendente;

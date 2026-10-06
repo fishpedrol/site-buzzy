@@ -2,17 +2,27 @@
 // Download (DEC-042): o .exe é a ação principal; o código no GitHub é uma ação separada.
 // Tudo o que muda por versão vem de src/config/release.ts, lido por src/lib/release.ts.
 import { rotulo, tituloDeSecao } from "../lib/estilos";
+import { caminho } from "../lib/caminho";
 import Pixel from "./Pixel.astro";
 import {
   aDefinir,
   assinado,
-  download,
-  nomeDoArquivo,
+  download as downloadPublico,
+  downloadCompleto,
   repositorio,
   validacaoWindowsLimpoPendente,
   zipDoCodigo,
 } from "../lib/release";
 
+interface Props {
+  /** A edição oferecida (DEC-044): a pública, na página principal; a completa, só na página separada. */
+  edicao?: "publica" | "completa";
+}
+
+const completa = Astro.props.edicao === "completa";
+const download = completa ? downloadCompleto : downloadPublico;
+/** Nome usado no comando de conferência do SHA-256. */
+const nomeDoArquivo = download?.nomeDoArquivo ?? (completa ? "Buzzy-<versão>-completo-win-x64.exe" : "Buzzy-<versão>-win-x64.exe");
 const pastaDeDados = "%LOCALAPPDATA%\\Buzzy";
 // O runtime do .NET extrai numa pasta com o nome do arquivo .exe, sem a extensão (medido no F9-P10 do projeto principal).
 const pastaDoRuntime = `%TEMP%\\.net\\${nomeDoArquivo.replace(/\.exe$/i, "")}`;
@@ -83,8 +93,17 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[11px] uppercase`;
     <div>
       <p class={`${rotulo} mb-19 text-gold-light text-[12px]`}>05 / LEVE O BUZZY COM VOCÊ</p>
       <h2 class={`${tituloDeSecao} mb-18 text-[clamp(41px,4.7vw,57px)]`} id="download-title">
-        Um cantinho<br />mais <span class="text-gold-light">animado.</span>
+        {completa ? <>Edição<br /><span class="text-gold-light">completa.</span></> : <>Um cantinho<br />mais <span class="text-gold-light">animado.</span></>}
       </h2>
+      {
+        completa && (
+          <p class="max-w-380 mb-16 py-10 px-12 border-2 border-gold-light text-cream text-[14px] leading-[1.55] celular:max-w-480" role="note">
+            <b class="text-gold-light">Conteúdo +18.</b> Esta edição tem todos os itens do tamagotchi adulto, inclusive drogas
+            ilícitas de desenho animado. Eles são opcionais, vêm desligados e são só regra de jogo, sem relação com o mundo
+            real. Se você não tem 18 anos, use a <a class="underline underline-offset-3 hover:text-gold-light" href={caminho("")}>versão do site principal</a>.
+          </p>
+        )
+      }
       <p class="max-w-380 mb-0 text-on-navy text-[15px] leading-[1.65] celular:max-w-480">
         {
           download
@@ -106,7 +125,7 @@ const tituloDoQuadro = `${rotulo} mb-9 text-red text-[11px] uppercase`;
             )
           }
         </div>
-        <h3 class={tituloDoCartao} id="exe-title">Buzzy para Windows</h3>
+        <h3 class={tituloDoCartao} id="exe-title">{completa ? "Buzzy, edição completa" : "Buzzy para Windows"}</h3>
         <p class={textoDoCartao}>
           {download ? "Um único .exe para Windows 10 ou 11 (64 bits), sem instalador e sem pacotes extras." : "Planejado como um único .exe para Windows 10 ou 11 (64 bits), sem instalador e sem pacotes extras."}
         </p>

@@ -2,6 +2,7 @@
 import Marca from "./Marca.astro";
 import { repositorio } from "../lib/release";
 import { transicaoDeCor } from "../lib/estilos";
+import { caminho } from "../lib/caminho";
 ---
 
 <footer class="text-cream bg-surface-footer" data-fundo="escuro">
@@ -14,6 +15,14 @@ import { transicaoDeCor } from "../lib/estilos";
       class={`inline-flex items-center gap-8 py-14 -my-14 ml-auto text-gold-light text-[13px] font-bold hover:text-cream ${transicaoDeCor}`}
       href={repositorio}>GitHub <span aria-hidden="true">↗</span></a
     >
+  </div>
+  <div class="section-wrap pb-18 text-footer-text text-[12px] leading-[1.6]">
+    <p class="m-0 max-w-760">
+      Gratuito e não oficial, sem afiliação com titulares de obras, personagens ou marcas de terceiros.
+      Para pedir a remoção de algum conteúdo, <a class={`text-gold-light underline underline-offset-3 hover:text-cream ${transicaoDeCor}`} href={`${repositorio}/issues`}>abra uma issue no GitHub</a>.
+      <a class={`text-gold-light underline underline-offset-3 hover:text-cream ${transicaoDeCor}`} href={caminho("LICENSE.txt")}>Licença</a> ·
+      <a class={`text-gold-light underline underline-offset-3 hover:text-cream ${transicaoDeCor}`} href={caminho("THIRD-PARTY-NOTICES.txt")}>Avisos de terceiros</a>
+    </p>
   </div>
   <div
     class="flex min-h-38 items-center justify-between gap-20 px-[max(32px,calc((100%-var(--page-width))/2))] border-t border-cream/13 text-footer-meta font-mono text-[11px] leading-none tracking-[0.06em] celular:px-20 estreito:text-[10px]"
