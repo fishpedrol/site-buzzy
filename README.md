@@ -19,7 +19,7 @@
 
 ## Sobre
 
-Esta página apresenta o Buzzy e explica como ele se movimenta, reage e respeita o espaço de quem usa o computador. O site acompanha a identidade do aplicativo com pixel art original, paleta inspirada no chapéu de palha e uma interface leve, responsiva e acessível.
+Esta página apresenta o Buzzy e explica como ele se movimenta, reage e respeita o espaço de quem usa o computador. O site acompanha a identidade do aplicativo com pixel art própria, paleta inspirada no chapéu de palha e uma interface leve, responsiva e acessível.
 
 O repositório contém somente o site. O código do aplicativo está no [repositório principal do Buzzy](https://github.com/fishpedrol/Buzzy).
 
@@ -38,7 +38,7 @@ npm run preview  # serve o dist/ em http://localhost:4321/site-buzzy/
 
 | Opção | Destino | Situação |
 |---|---|---|
-| Buzzy para Windows | Um único `.exe` para Windows 10 ou 11 x64, sem instalador nem pacotes extras (o .NET vai dentro) | Ainda não há versão publicada: o botão fica desativado até `src/config/release.ts` receber a URL de uma release validada |
+| Buzzy para Windows | Um único `.exe` para Windows 10 ou 11 x64, sem instalador nem pacotes extras (o .NET vai dentro) | Publicado: o botão aponta para a release definida em `src/config/release.ts` (hoje a v0.1.1); sem URL ali, ele fica desativado |
 | Código-fonte | [Repositório no GitHub](https://github.com/fishpedrol/Buzzy) ou [ZIP da branch `main`](https://github.com/fishpedrol/Buzzy/archive/refs/heads/main.zip) | Ação separada do download |
 
 Versão, tamanho, SHA-256, assinatura e endereço do `.exe` ficam num só arquivo, `src/config/release.ts`. Com a URL preenchida, o build falha se faltar algum dado de conferência.
